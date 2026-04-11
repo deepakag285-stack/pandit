@@ -20,14 +20,84 @@
 
 </head>
 <body>
-    <div class="container">
-        <img src="">
+    <div class="slider-container">
+    <div class="slides">
+        <div class="slide active"><img class="ig2"src="images/1000094627.jpg" alt=""></div>
+        <div class="slide"><img class="ig2" src="images/1000094663.jpg" alt=""></div>
+        <div class="slide"><img class="ig2" src="images/1000094651.jpg" alt=""></div>
+        <div class="slide"><img class="ig2"src="images/1000094654.jpg" alt=""></div>
     </div>
-</body>
-<style>
+    
+    <h1 class="prev" onclick="changeSlide(-1)">&#10094;</h1>
+    <h1 class="next" onclick="changeSlide(1)">&#10095;</h1>
+</div>
+   </body>
+   <style> 
+.slider-container {
+    position: relative;
+    max-width: 450px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
 
+.slide {
+    display: none; /* Hide images by default */
+    width: 100%;
+}
+
+.slide img {
+    width: 450px;
+    height: 450px;
+    display: block;
+}
+
+.active {
+    display: block; /* Show the active image */
+}
+
+/* Navigation Buttons */
+h1 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.next { right: 0; }
+.prev { left: 0; }
+
+h1:hover { background: rgba(0,0,0,0.8); 
+}
 </style>
-<scrip>
+ <script> 
+ let currentIndex = 0;
+const slides = document.querySelectorAll('.slide');
 
-</scrip>
+function changeSlide(direction) {
+    // 1. Remove 'active' class from current slide
+    slides[currentIndex].classList.remove('active');
+
+    // 2. Update the index
+    currentIndex += direction;
+
+    // 3. Handle Looping (if at end, go to start; if at start, go to end)
+    if (currentIndex >= slides.length) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = slides.length - 1;
+    }
+
+    // 4. Add 'active' class to the new slide
+    slides[currentIndex].classList.add('active');
+}
+
+// Optional: Auto-play every 5 seconds
+setInterval(() => changeSlide(1), 5000);
+
+</script>
 </html>
