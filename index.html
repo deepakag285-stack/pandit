@@ -153,7 +153,7 @@ setInterval(() => changeSlide(1), 2000);
                            <h8> आखिरी बार वेबसाइट को अपडेट किया  
                            </h8>
                            <br>
-                            <h7> 15 April-2026 AT 09:04 बजे</h7>
+                            <h7> 15 April-2026 AT 10:00बजे</h7>
                              </div>
   </body>
 <style> 
@@ -162,6 +162,13 @@ setInterval(() => changeSlide(1), 2000);
           margin-top:1cm; 
         margin-left: 0.5cm;
         margin-right: 0.5cm;
+        background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
+    }
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
     }
      img{
         height: 250px;

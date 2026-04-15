@@ -130,10 +130,16 @@
 <style>
     body{
                 background: linear-gradient(260deg, yellow 16% , green 50%, orangered 50%, orangered 100%);
-
-        margin-top: 1cm;
+         margin-top: 1cm;
+                 background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
     }
-    h3{
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+     h3{
         margin-left: 3cm;
         color: red;
                     font-weight: 900;
@@ -153,8 +159,15 @@
     .card{
         box-shadow: 1px 1px 1px 1px orchid;
                                                   background: linear-gradient(260deg, green 16% , blue 50%, orange 50%, olive 100%);
-     }
-    .card-header{
+         background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
+    }
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+                                                  .card-header{
          background-color: blue;
     }
     img{

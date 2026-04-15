@@ -231,8 +231,15 @@
     body{
                 background: linear-gradient(150deg, yellow 10% , red 70%, black 70%);
         margin-top: 1cm;
+                background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
     }
-        .ji{
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+         .ji{
         height: 60px;
         width: 60px;
      }
@@ -276,8 +283,15 @@
      .card{
          box-shadow: 1px 1px 1px 1px purple;
                                  background: linear-gradient(260deg, pink 16% , blue 50%, orangered 50%, olive 100%);
+         background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
     }
- .card-header{
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+                                 .card-header{
     background-color: olivedrab;
 }
 h5{

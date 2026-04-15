@@ -162,12 +162,26 @@
          margin-top: 1cm;
             margin-left:0.3cm;
                     background: linear-gradient(260deg, yellow 16% , red 50%, orangered 50%, orangered 100%);
+            background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
+    }
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
     }
     .card{
          box-shadow: 1px 1px 1px 1px olive;
                                           background: linear-gradient(260deg, pink 16% , blue 50%, black 50%, olive 100%);
+         background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
     }
-    h5{
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+                                          h5{
         margin-left: 2cm;
         color: white;
                     font-weight: 900;
