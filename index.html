@@ -301,8 +301,15 @@ setInterval(() => changeSlide(1), 2000);
                            <h8> आखिरी बार वेबसाइट को अपडेट किया  
                            </h8>
                            <br>
-                            <h7> 16-April-19:33 बजे</h7>
-                             </div>
+                           <h7 id="datetime"></h7>
+                              </div>
+                             <script>
+                                function showdatetime(){
+                                    let now=new Date();
+                                    document.getElementById("datetime").innerHTML=now;
+                                }
+                                showdatetime();
+                                </script>
   </body>
 <style> 
     body{
