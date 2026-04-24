@@ -165,10 +165,12 @@ function changeSlide(direction) {
 setInterval(() => changeSlide(1), 2000);
 </script>
 <hr>
+    <div class="card">
 <div class="form-container">
     <h3 class= "ajs">अपनी चर्चा लिखें।</h3>
     <textarea id="problemText" placeholder="अपनी चर्चा लिखें।..."></textarea>
 <button onclick="sendToWhatsapp()">अब भेजें</button>
+</div>
 </div>
     <style>
         .form-container { max-width: 400px; margin: 20px auto; font-family: Arial; }
@@ -193,7 +195,7 @@ function sendToWhatsapp() {
     }
 
     // 3. Format the message for the URL
-    let encodedMessage = encodeURIComponent("मुझे एक समस्या है-:<hr> " + problem);
+    let encodedMessage = encodeURIComponent("मुझे एक समस्या है-: " + problem);
     
     // 4. Create the WhatsApp URL
     let whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
