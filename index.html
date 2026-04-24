@@ -164,6 +164,43 @@ function changeSlide(direction) {
 // Optional: Auto-play every 5 seconds
 setInterval(() => changeSlide(1), 2000);
 </script>
+<hr>
+<div class="form-container">
+    <h3>अपनी चर्चा लिखें।/h3>
+    <textarea id="problemText" placeholder="अपनी चर्चा लिखें।..."></textarea>
+    <button onclick="sendToWhatsapp()">अब भेजें</button>
+</div>
+    <style>
+        .form-container { max-width: 400px; margin: 20px auto; font-family: Arial; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
+        button { background-color: #25D366; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        button:hover { background-color: #128C7E; }
+    </style>
+<script>
+function sendToWhatsapp() {
+    // 1. Get the user's input
+    let problem = document.getElementById("problemText").value;
+    
+    // 2. Your WhatsApp number (International format, no + or 00)
+    let phoneNumber = "919813132098"; // Example: 91 for India + 10-digit number
+    
+    if (problem.trim() === "") {
+        alert("Please describe your problem first!");
+        return;
+    }
+
+    // 3. Format the message for the URL
+    let encodedMessage = encodeURIComponent("मुझे एक समस्या है-:<hr> " + problem);
+    
+    // 4. Create the WhatsApp URL
+    let whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // 5. Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank').focus();
+}
+</script>
+
+
             <img class="ig45" src="images/3o7ZeoKiK2YtFjxKNy.gif">
                <a  href="https://wa.me/9813132098?text= 1) आचार्य जी प्रणाम। हम अपने बारे में कुछ पूछना चाहते हैं।
   2) आचार्य जी नमस्कार हम कुछ जन्म कुंडली के बारे में जानना चाहते हैं
