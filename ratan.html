@@ -28,12 +28,13 @@
     white-space: nowrap;
     margin-left: 2cm;
 }
-
+.translate-box{
+    background-color: yellow;
+}
 .goog-te-gadget {
     font-size: 0; /* remove extra text space */
 }
-
-.goog-te-gadget select {
+ .goog-te-gadget select {
     height: 32px;
     font-size: 14px;
     padding: 4px 8px;
@@ -67,8 +68,7 @@ function googleTranslateElementInit() {
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <hr>
-                   <a  href="https://wa.me/9813132098?text= 1) आचार्य जी प्रणाम। हम अपने बारे में कुछ पूछना चाहते हैं।
+                    <a  href="https://wa.me/9813132098?text= 1) आचार्य जी प्रणाम। हम अपने बारे में कुछ पूछना चाहते हैं।
   2) आचार्य जी नमस्कार हम कुछ जन्म कुंडली के बारे में जानना चाहते हैं
   3) आचार्य जी नमस्कार हम राशि रत्न की विस्तृत जानकारी लेना चाहते हैं" class="whatshap-float" ><img  class="ji" src="images/QtvHd6lI9q4iydr59B.gif"></a>
   <br>
@@ -90,10 +90,9 @@ function googleTranslateElementInit() {
                                     <marquee direction=right> 
                                    <h3></h3>
                                    </marquee>
-                                   <br><br><br><br>
-                                                                      <a href="index.html"><button class="btn btn-primary" style="font-weight:bold">वापस जाओ</button> </a> 
-                              <br><br><br><br>
-                                   <table class="table table-bordered">
+                                                                       <a href="index.html"><button class="btn btn-primary" style="font-weight:bold">वापस जाओ</button> </a> 
+                                    <br><br>
+                                                                       <table class="table table-bordered">
                                     <tr>
                                         <th>क्रम</th>
                                         <th>रत्न /रत्न का नाम</th>
@@ -153,12 +152,20 @@ function googleTranslateElementInit() {
 </body>
 <style>
      body{
-        background-image: URL("images/IMG-20260418-WA0012 (1).jpg");
-          background-position: fixed;
-          background-size: cover;
-         height: 50px;
-         width: 100%;
-     }
+                    background: linear-gradient(260deg, green 50% , red 50%);
+
+     margin-top: 1cm;
+     margin-left: 0.1cm;
+             background-size: 400% 400%;
+        animation:gradientAnimation 10s ease infinite
+    }
+    @keyframes gradientAnimation {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+
+      
       button{
         margin-left: 3cm;
     }
