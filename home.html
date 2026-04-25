@@ -19,7 +19,57 @@
 
 </head>
 <body>
-  
+  <div class="translate-box">
+     <div id="google_translate_element"></div><b>Select Language:</b>
+</div>
+ <style>
+#google_translate_element {
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 2cm;
+}
+
+.goog-te-gadget {
+    font-size: 0; /* remove extra text space */
+}
+.translate-box{
+    background-color: yellow;
+}
+.goog-te-gadget select {
+    height: 32px;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.translate-box{
+    background-color: yellow;
+}
+/* Hide Google text/logo */
+.goog-te-gadget span {
+    display: none;
+}
+
+/* Remove top banner */
+.goog-te-banner-frame {
+    display: none !important;
+}
+ </style>
+<!-- Google Translate Script -->
+<script>
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,pa,mr,sa',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        'google_translate_element'
+    );
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <hr>
                  <a  href="https://wa.me/9813132098?text= 1) आचार्य जी प्रणाम। हम अपने बारे में कुछ पूछना चाहते हैं।
   2) आचार्य जी नमस्कार हम कुछ जन्म कुंडली के बारे में जानना चाहते हैं
