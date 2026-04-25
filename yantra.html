@@ -20,6 +20,55 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <div class="translate-box">
+     <div id="google_translate_element"></div><b>Select Language:</b>
+</div>
+ <style>
+#google_translate_element {
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 2cm;
+}
+
+.goog-te-gadget {
+    font-size: 0; /* remove extra text space */
+}
+
+.goog-te-gadget select {
+    height: 32px;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Hide Google text/logo */
+.goog-te-gadget span {
+    display: none;
+}
+
+/* Remove top banner */
+.goog-te-banner-frame {
+    display: none !important;
+}
+ </style>
+<!-- Google Translate Script -->
+<script>
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,pa,mr,sa',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        'google_translate_element'
+    );
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <hr>
                                    <a href="index.html"><button class="btn btn-success" style="font-weight:bold">वापस जाओ</button> </a> 
                            <hr>
                            <marquee direction="right"> 
