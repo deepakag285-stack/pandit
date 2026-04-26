@@ -1,10 +1,10 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -17,105 +17,156 @@
     <link rel="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
- </head>
- <body>
-    <button class="btn btn-danger"><a class="ab" href="home.html">वापस जाओ</a></button>
-    <hr>
-    <div class="card">
-        <div class="card-header">
-            <h4>कार्यक्रम</h4>
+</head>
+<body>
+      <div class="translate-box">
+     <div id="google_translate_element"></div><b>Select Language:</b>
+</div>
+ <style>
+#google_translate_element {
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 2cm;
+}
+
+.goog-te-gadget {
+    font-size: 0; /* remove extra text space */
+}
+.translate-box{
+    background-color: yellow;
+}
+.goog-te-gadget select {
+    height: 32px;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.translate-box{
+    background-color: yellow;
+}
+/* Hide Google text/logo */
+.goog-te-gadget span {
+    display: none;
+}
+
+/* Remove top banner */
+.goog-te-banner-frame {
+    display: none !important;
+}
+ </style>
+<!-- Google Translate Script -->
+<script>
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,pa,mr,sa',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        'google_translate_element'
+    );
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <style>
+        body{
+            background-color: lightpink;
+        }
+        h4{
+margin-left: 2cm;
+color: black;
+font-weight: bold;
+        }
+          h1{
+            color: blueviolet;
+        }
+                      .nav-link{
+             font-size: large;
+            font-weight: bold;
+                                  font-weight: 900;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+
+           }
+        h6{
+color: white;
+font-weight: bold;
+
+        }
+        .card{
+            background-color: lightskyblue;
+        }
+      .ig{
+        height: 50px;
+        width: 50px;
+      }
+      h5{
+        color: red;
+      }
+      body{
+        margin-top: 1cm;
+      }
+      .chai2{
+        margin-left: 1cm;
+        color: red;
+      }
+       a{
+        text-decoration: none;
+        color: black;
+      }
+       .btn-warning{
+        margin-left: 0.5cm;
+      }
+      h3{
+        margin-left:3cm;
+        color: green;
+      }
+     </style>
+     <hr>
+     <h3>मुख्य समाचार </h3>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <!-- Brand -->
+                                           <img class="ig" src="images/IMG-20260410-WA0001.jpg">
+                                                                                          <button  class="btn btn-danger" style="font-weight:bold"><a href="home.html">वापस जाओ</a></button>
+        <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <hr>
+         <li class="nav-item">
+          <a class="nav-link " href="vichar.html">विचार</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="image.html">तस्वीरें</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="video.html">वीडियो</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link" href="question.html">सवाल</a>
+        </li>
+                 <li class="nav-item">
+          <a class="nav-link" href="solution.html">समस्याओं का समाधान और<br> सेवाएँ उपलब्ध</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+   </div>
+   <hr>
+   <div class="card">
+    <div class="card-header">
         </div>
         <div class="card-footer">
-            <!--<marquee direction="down">-->  
-                <h3><a href="https://drive.google.com/file/d/1XHR5SpNO1Dc89DHfh7y8dZcHPUMuZTbv/view?usp=drive_link">सुंदरकांड कार्यक्रम के बारे में</a><sup>7-04-2026</sup></h3>
-    <hr>
-                 <!--
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
-<h3><a href=""></a></h3>
-<hr>
--->
-            </marquee>
-        </div>
-    </div>
- </body>
- <style>
-    body{
-        margin-top: 1cm;
-    }
-    .ab{
-        color: goldenrod;
-    }
-    sup{
-        color: black;
-    }
-    h4{
-        margin-left: 2cm;
-    }
-    a{
-        text-decoration: none;
-                color: red;
-    }
-    a:hover{
-        color: red;
-    }
-    button{
-        margin-left: 3cm;
-        width: 150px;
-        height: 50px;
-     }
-     .card{
-        height: 500px;
-        margin-left: 0.5cm;
-        margin-right: 0.5cm;
-     }
-     h3{
-        color: black;
-     }
-     hr{
-        color:darkred;
-     }
-    </style>
- </html>
+            </div>
+   </div>
+   </body>
+</HTML>
