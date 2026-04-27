@@ -16,31 +16,11 @@
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
  </head>
- <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="index.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
+  <body>
       <div class="translate-box">
      <div id="google_translate_element"></div><b>Select Language:</b>
 </div>
@@ -211,20 +191,31 @@ function googleTranslateElementInit() {
         }
  </style>
     <script>
-         const parent=collapseElement.closest(".card-container");
-    const btn=parent
-    const mycollapse=document.querySelector("#viewmore");
-    const mybtns=document.querySelector("#viewmorebtn");
-     collapseElement.addEventListener("show.bs.collapse",function(){
-      mybtns.innerHTML="कम देखें";
+      document.querySelectorAll('.collapse').forEach(collapseEl => {
+    // जब सेक्शन खुले
+    collapseEl.addEventListener('show.bs.collapse', function () {
+        const btn = this.parentElement.querySelector('.viewmore-btn');
+        if(btn) btn.innerHTML = "कम देखें";
     });
- collapseElement.addEventListener("hide.bs.collapse",function(){
-  mybtns.innerHTML="और देखें";
- });
-   </script>
 
- <hr>
-    <div class="card">
+    // जब सेक्शन बंद हो
+    collapseEl.addEventListener('hide.bs.collapse', function () {
+        const btn = this.parentElement.querySelector('.viewmore-btn');
+        if(btn) btn.innerHTML = "और देखें";
+    });
+});
+        // const parent=collapseElement.closest(".card-container");
+    //const btn=parent
+   // const mycollapse=document.querySelector("#viewmore");
+   // const mybtns=document.querySelector("#viewmorebtn");
+   //  collapseElement.addEventListener("show.bs.collapse",function(){
+   //   mybtns.innerHTML="कम देखें";
+   // });
+ //collapseElement.addEventListener("hide.bs.collapse",function(){
+  //mybtns.innerHTML="और देखें";
+ //});
+   </script>
+    <div class="card card-container">
     <div class="card-img">
         <img src="images/IMG-20260427-WA0080.jpg">
         </div>
@@ -237,11 +228,11 @@ function googleTranslateElementInit() {
             <hr>
             <h2>वर्णन</h2>
             <h3>वास्तु शास्त्र के अनुसार, पंचमुखी हनुमान की मूर्ति या तस्वीर को स्थापित करने के लिए दो दिशाएँ सबसे उत्तम मानी जाती हैं: 
-                               <div class="collapse" id="viewmore"> 
+                               <div class="collapse" id="viewmore1"> 
 <div class="card card-body mb-4"> 
                 1. मुख्य और सबसे शुभ दिशा: दक्षिण दिशा पंचमुखी हनुमान जी की मूर्ति/तस्वीर लगाने के लिए दक्षिण दिशा को सबसे श्रेष्ठ माना जाता है। कारण: वास्तु शास्त्र के अनुसार, दक्षिण दिशा से सबसे अधिक नकारात्मक ऊर्जा का प्रवाह होता है। हनुमान जी को दक्षिण दिशा का रक्षक माना जाता है और इस दिशा में उनकी पंचमुखी स्वरूप की प्रतिमा स्थापित करने से घर में नकारात्मक शक्तियों, भय और बुरी ऊर्जा का प्रवेश रुक जाता है। किस ओर मुख: जब आप मूर्ति या तस्वीर लगाते हैं, तो यह सुनिश्चित करें कि हनुमान जी का मुख दक्षिण दिशा की ओर हो (यानी आप मूर्ति को उत्तर दिशा की दीवार पर लगाएं ताकि उनका मुख दक्षिण की ओर रहे)। 2. वास्तु दोष निवारण के लिए: दक्षिण-पश्चिम कोना यदि आप अपने घर के वास्तु दोषों को दूर करना चाहते हैं, तो दक्षिण-पश्चिम (नैऋत्य कोण) कोने में पंचमुखी हनुमान जी की तस्वीर लगाना बहुत शुभ माना जाता है। लाभ: यह घर के सभी तरह के वास्तु दोषों को शांत करने और मंगलकारी ऊर्जा लाने में सहायक होता है। पंचमुखी हनुमान जी के मुख और दिशाएँ पंचमुखी हनुमान जी के पाँचों मुख अलग-अलग दिशाओं की ओर होते हैं और प्रत्येक मुख का अपना महत्व है: वानर मुख (हनुमान मुख): पूर्व दिशा की ओर, यह दुश्मनों पर विजय दिलाता है। गरुड़ मुख: पश्चिम दिशा की ओर, यह जीवन की रुकावटों और परेशानियों को दूर करता है। वराह मुख: उत्तर दिशा की ओर, यह लंबी उम्र, प्रसिद्धि और शक्ति प्रदान करता है। नृसिंह मुख: दक्षिण दिशा की ओर, यह भय, तनाव और मुश्किलों को दूर करता है (यही कारण है कि यह दिशा सबसे महत्वपूर्ण है)। अश्व मुख: आकाश की दिशा की ओर, यह मनोकामनाओं को पूर्ण करता है। ध्यान रखने योग्य बातें: मूर्ति/तस्वीर को हमेशा साफ और पवित्र जगह पर स्थापित करें। इसे कभी भी बेडरूम, बाथरूम या सीढ़ियों के नीचे नहीं लगाना चाहिए। आप पंचमुखी हनुमान जी की तस्वीर मुख्य द्वार के ऊपर भी लगा सकते हैं, ताकि यह एक रक्षक के रूप में कार्य करे।
 </h3>
-<button id="viewmorebtn" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#viewmore">
+ <button class="btn btn-primary viewmore-btn" data-bs-toggle="collapse" data-bs-target="#viewmore1">
  और देखें
 </button>
                             <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
@@ -250,7 +241,7 @@ function googleTranslateElementInit() {
 </div>
 </div>
       <hr>
-<div class="card">
+<div class="card card-container">
     <div class="card-img">
         <img src=" ">
         </div>
@@ -263,11 +254,11 @@ function googleTranslateElementInit() {
             <hr>
             <h2>वर्णन</h2>
             <h3>
-                                               <div class="collapse" id="viewmore1"> 
+                                               <div class="collapse" id="viewmore2"> 
 <div class="card card-body mb-4"> 
 
             </h3>
-            <button id="viewmorebtn1" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#viewmore1">
+            <button  class="btn btn-primary viewmore-btn" data-bs-toggle="collapse" data-bs-target="#viewmore2">
  और देखें
 </button>
                              <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
@@ -275,7 +266,7 @@ function googleTranslateElementInit() {
             </button>
 </div>
 </div>
-    <hr>
+     <hr>
   <script> 
 function contact(num){
     window.open("https://wa.me/9813132098?text=मुझे इस शीर्षक के बारे में और अधिक जानकारी चाहिए।");
@@ -284,4 +275,4 @@ show();
      </script>
 
 </body>
-</HTML>
+</html>
