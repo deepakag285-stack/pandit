@@ -166,9 +166,8 @@ function googleTranslateElementInit() {
 </nav>
 
           <h4>उपयोगकर्ताओं के लिए उपलब्ध स्टॉक</h4>
-
-      <div id="items"></div>
-    <style>
+<hr>
+     <style>
     #items{
         color: white;
         background-color: darkslategrey;
@@ -179,9 +178,19 @@ function googleTranslateElementInit() {
     .btn-dark{
         margin-left: 3cm;
     }
+    img{
+        width: 350px;
+        height: 250px;
+    }
     h3{
         color: palevioletred;
         margin-left: 1.5cm;
+    }
+    .card{
+         box-shadow: 2px 2px 2px 2px green;
+    }
+    .card-footer{
+        background-color: palevioletred;
     }
      h4{
         margin-left: 2cm;
@@ -189,46 +198,84 @@ function googleTranslateElementInit() {
     }
     h2{
         margin-left: 3cm;
+        color: red;
     }
      hr{
-        color: white;
+        color: black;
+     }
         h4{
             margin-left: 2cm;
         }
-    }
-</style>
- <script>
-let items = JSON.parse(localStorage.getItem("items") || "[]");
-
-function show(){
-    let html = "";
-
-    items.forEach(item=>{
-        html += `
-        <div style="border:1px solid red; padding:10px; margin:10px;">
-            <h2>शीर्षक</h2>
-            <h3>${item.title}</h3>
+ </style>
+<div class="card">
+    <div class="card-img">
+        <img src="">
+        </div>
+        <div class="card-header">
+                          <h2>शीर्षक</h2>
+            <h3>h</h3>
             <hr>
                         <h2>कीमत</h2>
-            <h3>₹${item.price}</h3>
+            <h3>₹ </h3>
             <hr>
             <h2>वर्णन</h2>
-            <h3>${item.desc}</h3>
-<hr>
-            <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
+            <h3>u</h3>
+            </div>
+            <div class="card-footer">
+                            <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
                 अभी खरीदें
             </button>
+            </div>
         </div>
-        `;
-    });
-
-    document.getElementById("items").innerHTML = html;
-}
-
+  <hr>
+   <div class="card">
+    <div class="card-img">
+        <img src="">
+        </div>
+        <div class="card-header">
+                          <h2>शीर्षक</h2>
+            <h3>h</h3>
+            <hr>
+                        <h2>कीमत</h2>
+            <h3>₹ </h3>
+            <hr>
+            <h2>वर्णन</h2>
+            <h3>u</h3>
+            </div>
+            <div class="card-footer">
+                            <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
+                अभी खरीदें
+            </button>
+            </div>
+        </div>
+  <hr>
+   
+<div class="card">
+    <div class="card-img">
+        <img src="">
+        </div>
+        <div class="card-header">
+                          <h2>शीर्षक</h2>
+            <h3>h</h3>
+            <hr>
+                        <h2>कीमत</h2>
+            <h3>₹ </h3>
+            <hr>
+            <h2>वर्णन</h2>
+            <h3>u</h3>
+            </div>
+            <div class="card-footer">
+                            <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
+                अभी खरीदें
+            </button>
+            </div>
+        </div>
+  <hr>
+   
+ <script> 
 function contact(num){
     window.open("https://wa.me/9813132098?text=मुझे इस शीर्षक के बारे में और अधिक जानकारी चाहिए।");
 }
-
 show();
 </script>
 </body>
