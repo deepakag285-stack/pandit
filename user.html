@@ -181,10 +181,11 @@ function googleTranslateElementInit() {
     .card-img{
         width: 350px;
         height: 250px;
-     margin:left:1cm;
+     margin-left:1cm;
     }
     h3{
         color: palevioletred;
+        margin-left: 1cm;
       
     }
     .card{
@@ -209,6 +210,19 @@ function googleTranslateElementInit() {
             margin-left: 2cm;
         }
  </style>
+    <script>
+         const parent=collapseElement.closest(".card-container");
+    const btn=parent
+    const mycollapse=document.querySelector("#viewmore");
+    const mybtns=document.querySelector("#viewmorebtn");
+     collapseElement.addEventListener("show.bs.collapse",function(){
+      mybtns.innerHTML="कम देखें";
+    });
+ collapseElement.addEventListener("hide.bs.collapse",function(){
+  mybtns.innerHTML="और देखें";
+ });
+   </script>
+
  <hr>
     <div class="card">
     <div class="card-img">
@@ -230,14 +244,12 @@ function googleTranslateElementInit() {
 <button id="viewmorebtn" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#viewmore">
  और देखें
 </button>
-</div>
-</div>
-             <div class="card-footer">
                             <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
                 अभी खरीदें
             </button>
-            </div>
-    <hr>
+</div>
+</div>
+      <hr>
 <div class="card">
     <div class="card-img">
         <img src=" ">
@@ -255,32 +267,16 @@ function googleTranslateElementInit() {
 <div class="card card-body mb-4"> 
 
             </h3>
-            <button id="viewmorebtn" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#viewmore1">
+            <button id="viewmorebtn1" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#viewmore1">
  और देखें
 </button>
-</div>
-</div>
-             <div class="card-footer">
-                            <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
+                             <button class="btn btn-dark"onclick="contact('${item.whatsapp}')">
                 अभी खरीदें
             </button>
-            </div>
-        </div>
-    </div>
-  <hr>
-   <script>
-         const parent=collapseElement.closest(".card-container");
-    const btn=parent
-    const mycollapse=document.querySelector("#viewmore");
-    const mybtns=document.querySelector("#viewmorebtn");
-     collapseElement.addEventListener("show.bs.collapse",function(){
-      mybtns.innerHTML="कम देखें";
-    });
- collapseElement.addEventListener("hide.bs.collapse",function(){
-  mybtns.innerHTML="और देखें";
- });
-   </script>
- <script> 
+</div>
+</div>
+    <hr>
+  <script> 
 function contact(num){
     window.open("https://wa.me/9813132098?text=मुझे इस शीर्षक के बारे में और अधिक जानकारी चाहिए।");
 }
