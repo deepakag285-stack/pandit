@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Comments System</title>
+    <style>
+        body { font-family: sans-serif; background: #eef2f3; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        input, textarea { width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; background: #2ecc71; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #27ae60; }
+        
+        #commentSection { width: 100%; max-width: 500px; margin-top: 20px; }
+        .comment-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; gap: 15px; align-items: center; border-left: 5px solid #2ecc71; }
+        .comment-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .info h4 { margin: 0; color: #333; }
+        .info p { margin: 5px 0; color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Post a Comment</h3>
+    <input type="text" id="name" placeholder="Apna Naam likhein" required>
+    <input type="tel" id="phone" placeholder="Phone Number (10 digits)" required>
+    <textarea id="msg" placeholder="Message likhein..." required></textarea>
+    <input type="file" id="image" accept="image/*" required>
+    <button onclick="saveComment()">Comment Post Karein</button>
+</div>
+
+<div id="commentSection">
+    </div>
+
+<script>
+    // Page load hote hi purane comments load karo
+    window.onload = displayComments;
+
+    function saveComment() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const msg = document.getElementById('msg').value;
+        const imgFile = document.getElementById('image').files[0];
+
+        // Validation
+        if(!name || !phone || !msg || !imgFile) {
+            alert("Bhai, sabhi fields bharna zaroori hai!");
+            return;
+        }
+        if(phone.length < 10) {
+            alert("Valid phone number daliye!");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const newComment = {
+                userName: name,
+                userPhone: phone,
+                userMsg: msg,
+                userImg: e.target.result // Base64 image string
+            };
+
+            // Local Storage se purana data nikalo
+            let comments = JSON.parse(localStorage.getItem('myComments')) || [];
+            
+            // Naya comment add karo
+            comments.push(newComment);
+            
+            // Wapas save karo
+            localStorage.setItem('myComments', JSON.stringify(comments));
+
+            displayComments(); // UI update karo
+            clearForm();
+        };
+        reader.readAsDataURL(imgFile);
+    }
+
+    function displayComments() {
+        const section = document.getElementById('commentSection');
+        const comments = JSON.parse(localStorage.getItem('myComments')) || [];
+        
+        section.innerHTML = '<h3>Sabhi Comments</h3>';
+        
+        comments.reverse().forEach(c => {
+            section.innerHTML += `
+                <div class="comment-card">
+                    <img src="${c.userImg}">
+                    <div class="info">
+                        <h4>${c.userName} <small style="color:gray">(${c.userPhone})</small></h4>
+                        <p>${c.userMsg}</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function clearForm() {
+        document.getElementById('name').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('msg').value = '';
+        document.getElementById('image').value = '';
+    }
+</script>
+
+</body>
+</html>
