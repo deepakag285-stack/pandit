@@ -1,0 +1,157 @@
+          
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Comment System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+ 
+
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        h2 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="tel"], textarea {
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;
+        }
+        
+        .preview-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; display: none; margin-top: 10px; border: 2px solid var(--primary); }
+        
+        button { 
+            background: var(--primary); color: white; border: none; padding: 10px 20px; 
+            border-radius: 6px; cursor: pointer; font-size: 1rem; transition: opacity 0.3s;
+        }
+        button:hover { opacity: 0.9; }
+
+        #commentList { margin-top: 30px; }
+        .comment-card { 
+            display: flex; align-items: flex-start; gap: 15px; 
+            padding: 15px; border-bottom: 1px solid #eee; animation: fadeIn 0.5s ease;
+        }
+        .comment-card img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+        .comment-details h4 { margin: 0; color: var(--primary); }
+        .comment-details p { margin: 5px 0; font-size: 0.9rem; }
+        .comment-phone { font-size: 0.75rem; color: #888; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Leave a Comment</h2>
+    <form id="commentForm">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="userName" placeholder="John Doe" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="userPhone" placeholder="1234567890" required>
+        </div>
+
+        <div class="form-group">
+            <label>Message</label>
+            <textarea id="userMsg" rows="3" placeholder="Write something..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Profile Image</label>
+            <input type="file" id="userImg" accept="image/*" required>
+            <img id="imgPreview" class="preview-img" src="" alt="Preview">
+        </div>
+
+        <button type="submit">Post Comment</button>
+    </form>
+
+    <div id="commentList">
+        <h3>Recent Comments</h3>
+        </div>
+</div>
+
+<script>
+    const form = document.getElementById('commentForm');
+    const imgInput = document.getElementById('userImg');
+    const imgPreview = document.getElementById('imgPreview');
+    const commentList = document.getElementById('commentList');
+
+    // Image Preview Logic
+    imgInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imgPreview.src = e.target.result;
+                imgPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Form Submission and Validation
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('userName').value.trim();
+        const phone = document.getElementById('userPhone').value.trim();
+        const msg = document.getElementById('userMsg').value.trim();
+        const phoneRegex = /^[0-9]{10,15}$/; // Basic validation for 10-15 digits
+
+        // Validation Checks
+        if (name.length < 3) {
+            alert("Name must be at least 3 characters long.");
+            return;
+        }
+        if (!phoneRegex.test(phone)) {
+            alert("Please enter a valid phone number (10-15 digits).");
+            return;
+        }
+
+        // Create Comment Object
+        createComment(name, phone, msg, imgPreview.src);
+
+        // Reset Form
+        form.reset();
+        imgPreview.style.display = 'none';
+    });
+
+    function createComment(name, phone, msg, imgSrc) {
+        const commentCard = document.createElement('div');
+        commentCard.className = 'comment-card';
+
+        commentCard.innerHTML = `
+            <img src="${imgSrc}" alt="Avatar">
+            <div class="comment-details">
+                <h4>${name} <span class="comment-phone">(${phone})</span></h4>
+                <p>${msg}</p>
+            </div>
+        `;
+
+        commentList.prepend(commentCard);
+    }
+</script>
+
+</body>
+</html>
+
+ 
