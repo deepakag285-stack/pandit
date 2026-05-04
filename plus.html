@@ -1,0 +1,41 @@
+  
+  <style>
+
+  summary {
+    display: flex; /* Chrome/Firefox/Edge के लिए */
+  }
+ 
+  /* 2. summary से पहले + sign जोड़ें */
+  summary::after {
+    content: '+';
+    margin-left:4cm;
+     color: red;
+    
+  }
+
+  /* 3. जब details ओपन हो, तब - sign दिखाएं */
+  details[open] summary::after{
+    content: '-';
+  }
+
+  /* सामान्य स्टाइलिंग */
+  summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  details {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<details>
+  <summary></summary>
+  <p></p>
+</details>
+
+ 
