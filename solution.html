@@ -120,6 +120,12 @@ font-weight: bold;
         margin-left:1cm;
         color: green;
       }
+      h5{
+        color: yellow;
+      }
+      h5:hover{
+        color: white;
+      }
      </style>
      <hr>
      <h3>समस्याओं का समाधान और<br> सेवाएँ उपलब्ध</h3>
@@ -177,28 +183,30 @@ font-weight: bold;
   summary::after {
     content: '+';
     margin-left:4cm;
-     color: red;
+     color: greenyellow;
     
   }
 
   /* 3. जब details ओपन हो, तब - sign दिखाएं */
   details[open] summary::after{
     content: '-';
+    color: white;
   }
 
   /* सामान्य स्टाइलिंग */
   summary {
+  background-color: black;
     cursor: pointer;
     font-weight: bold;
     padding: 10px;
-    background-color: #f0f0f0;
-  }
+   }
   details {
     border: 1px solid #ccc;
    }
 </style>
  
      <div class="card">
+      <h7>देखने के लिए + चिह्न पर क्लिक करें।</h7>
     <div class="card-header">
         <details>
             <summary>
@@ -213,73 +221,88 @@ font-weight: bold;
          </details>
   <div class="card">
     <div class="card-header">
-        <h5>2) वैवाहिक समस्या </h5>
-    </div>
-    <div class="card-footer">
+      <details>
+        <summary>
+         <h5>2) वैवाहिक समस्या </h5>
+                     </summary>
+      <div class="card-footer">
       <h6 class="ty">
 वैवाहिक कलह एक आम समस्या है जिसका सामना कई दंपतियों को करना पड़ता है। पंडित जी विवादों को सुलझाने और सुखी एवं स्थिर वैवाहिक जीवन सुनिश्चित करने के लिए समाधान प्रदान करते हैं।</h6>
      </div>
  </div>
- <hr>
- <div class="card">
-    <div class="card-header">
+       </details>
+  <div class="card">
+     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>3)  तलाक की समस्या</h5>
-    </div>
+    </summary>
  <div class="card-footer">
   <h6 class="ty">तलाक को रोकना और वैवाहिक सामंजस्य को बहाल करना हमारी विशेषज्ञता का एक अन्य क्षेत्र है। विस्तृत ज्योतिषीय विश्लेषण के माध्यम से अंतर्निहित समस्याओं का समाधान किया जा सकता है और प्रभावी उपाय लागू किए जा सकते हैं।</h6>
  </div>    
 </div>
-<hr>
-      <div class="card">
-    <div class="card-header">
+</details>
+       <div class="card">
+     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>4) प्रेम समस्या</h5>
-    </div>
+    </summary>
     <div class="card-footer">
             <h6 class="ty">प्रेम से जुड़ी सामान्य समस्याओं, जिनमें प्रेमी/प्रेमिका से संबंधित समस्याएं या परिवार से संबंधित प्रेम संबंधी मुद्दे शामिल हैं, का भी समाधान किया जाता है, जिससे एक सुखद प्रेम जीवन के लिए समग्र समाधान प्रदान किए जाते हैं।
 </h6>
-     </div>
+</summary>
  </div>
- <hr>
- <div class="card">
+ </div>
+ </details>
+  <div class="card">
     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>5) पारिवारिक समस्या </h5>
-    </div>
+  </summary>
     <div class="card-footer">
       <h6 class="ty">ज्योतिषीय मार्गदर्शन पारिवारिक विवादों को सुलझाने में मदद कर सकता है, जिससे घर में शांतिपूर्ण और प्रेमपूर्ण वातावरण को बढ़ावा मिलता है।</h6>
      </div>
  </div>
- <hr>
- <div class="card">
+</details>
+  <div class="card">
     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>6) बीएफ-जीएफ समस्या</h5>
-    </div>
+  </summary>
  <div class="card-footer">
   <h6 class="ty">प्रेमी-प्रेमिकाओं के बीच गलतफहमी, अविश्वास या संचार की कमी जैसी समस्याओं को ज्योतिषीय अंतर्दृष्टि और उपायों के माध्यम से प्रभावी ढंग से हल किया जा सकता है।</h6>
  </div>    
-</div>
-<hr>
-      <div class="card">
+ </div>
+</details>
+       <div class="card">
     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>7) वांछित साथी
 </h5>
-    </div>
+</summary>
     <div class="card-footer">
             <h6 class="ty">सही जीवनसाथी ढूंढना एक चुनौतीपूर्ण कार्य हो सकता है। ज्योतिषी रविंद्र शास्त्री वैदिक ज्योतिष का उपयोग करके संभावित जीवनसाथी की पहचान करते हैं, जिससे अनुकूलता और सामंजस्यपूर्ण संबंध सुनिश्चित होता है।
 </h6>
      </div>
  </div>
- <hr>
- <div class="card">
+</details>
+  <div class="card">
     <div class="card-header">
+                <details> 
+  <summary> 
         <h5>8) अपने पति को नियंत्रित करें</h5>
-    </div>
+  </summary>
     <div class="card-footer">
       <h6 class="ty">जिन लोगों को वैवाहिक समस्याओं का सामना करना पड़ रहा है, जहां उनका साथी भटक रहा है या ध्यान नहीं दे रहा है, उनके लिए विशिष्ट ज्योतिषीय उपाय नियंत्रण हासिल करने और रिश्ते में सामंजस्य वापस लाने में मदद कर सकते हैं।
 </h6>
      </div>
  </div>
- <hr>
- <div class="card">
+</details>
+  <div class="card">
     <div class="card-header">
         <details>
         <summary>
