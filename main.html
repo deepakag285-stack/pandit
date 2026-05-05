@@ -19,6 +19,114 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body> 
+    <style>
+  /* 1. टेक्स्ट और इमेज सुरक्षा (PC & Mobile) */
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none; /* मोबाइल पर इमेज दबाए रखने पर 'Save' मेनू नहीं आएगा */
+  }
+
+  img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  /* 2. प्रिंट को पूरी तरह ब्लॉक करना */
+  @media print {
+    body { display: none !important; }
+  }
+
+  /* 3. स्क्रीनशॉट प्रोटेक्शन ओवरले (Blur effect) */
+  .protected-content {
+    transition: filter 0.1s ease;
+  }
+  .is-blurred {
+    filter: blur(60px) !important;
+  }
+
+  /* 4. डायनामिक वॉटरमार्क (यूजर को डराने के लिए) */
+  #watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.1); /* बहुत हल्का दिखेगा */
+    z-index: 10000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+</style>
+
+<!-- वॉटरमार्क जो स्क्रीन पर दिखेगा -->
+<div id="watermark">CONFIDENTIAL - DO NOT COPY</div>
+
+<script>
+  /** A. राइट-क्लिक और लॉन्ग-प्रेस ब्लॉक करना (PC & Mobile) **/
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  /** B. PC कीबोर्ड शॉर्टकट्स ब्लॉक (F12, Inspect, Save, Print) **/
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.keyCode === 123 || // F12
+      (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) || // Ctrl+U, S, P
+      (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) // Ctrl+I/J/C
+    ) {
+      e.preventDefault();
+      alert("Security Alert: Content is Protected!");
+      return false;
+    }
+  });
+
+  /** C. मोबाइल 'Recent Apps' और स्क्रीनशॉट डिटेक्शन (Blur Technique) **/
+  // जब यूजर फोन पर नोटिफिकेशन पैनल नीचे करता है या स्क्रीनशॉट लेने की कोशिश करता है
+  window.addEventListener('blur', function() {
+    document.body.classList.add('is-blurred');
+  });
+  window.addEventListener('focus', function() {
+    document.body.classList.remove('is-blurred');
+  });
+
+  /** D. PC पर Print Screen बटन दबाने पर क्लिपबोर्ड साफ़ करना **/
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'PrintScreen') {
+      navigator.clipboard.writeText(''); // क्लिपबोर्ड खाली करना
+      alert('Screenshots are disabled!');
+    }
+  });
+
+  /** E. डेवलपर टूल्स डिटेक्शन (PC के लिए) **/
+  setInterval(function() {
+    const threshold = 160;
+    if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+      document.body.innerHTML = "<h2 style='text-align:center; color:red; margin-top:20%'>Security Breach! Please close Developer Tools to view content.</h2>";
+    }
+  }, 1000);
+
+  /** F. वॉटरमार्क में यूजर का IP दिखाना (Optional) **/
+  // आप किसी फ्री API से IP फेच करके वॉटरमार्क में डाल सकते हैं ताकि यूजर डरे।
+</script>
+async function getIPAndWatermark() {
+    try {
+        // एक फ्री API का उपयोग करके IP एड्रेस प्राप्त करना
+        const response = await fetch('https://ipify.org');
+        const data = await response.json();
+        const userIP = data.ip;
+
+        // वॉटरमार्क वाले Div में IP एड्रेस सेट करना
+        const watermarkDiv = document.getElementById('watermark');
+        watermarkDiv.innerText = `CONFIDENTIAL - IP: ${userIP} - DO NOT COPY`;
+    } catch (error) {
+        console.log("IP couldn't be loaded");
+    }
+}
+
+// पेज लोड होते ही फंक्शन चलाएं
+window.onload = getIPAndWatermark;
+
      <script>
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 
