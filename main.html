@@ -109,6 +109,7 @@
   /** F. वॉटरमार्क में यूजर का IP दिखाना (Optional) **/
   // आप किसी फ्री API से IP फेच करके वॉटरमार्क में डाल सकते हैं ताकि यूजर डरे।
 </script>
+<script> 
 async function getIPAndWatermark() {
     try {
         // एक फ्री API का उपयोग करके IP एड्रेस प्राप्त करना
@@ -126,7 +127,7 @@ async function getIPAndWatermark() {
 
 // पेज लोड होते ही फंक्शन चलाएं
 window.onload = getIPAndWatermark;
-
+</script>
      <script>
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 
