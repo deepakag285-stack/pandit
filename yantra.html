@@ -20,6 +20,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <script>
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+document.onkeydown = function(e) {
+  if (e.keyCode == 123) return false; // F12
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 73) return false; // Ctrl+Shift+I
+  if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
+};
+</script>
     <div class="translate-box">
      <div id="google_translate_element"></div><b>Select Language:</b>
 </div>
