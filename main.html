@@ -19,6 +19,23 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body> 
+        <style>
+    #watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-47deg);
+    font-size: 60px;
+    color: rgba(0.1, 0.1, 0.1, 0.2); /* बहुत हल्का दिखेगा */
+    z-index: 10000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+</style>
+
+<!-- वॉटरमार्क जो स्क्रीन पर दिखेगा -->
+<div id="watermark">आचार्य पंडित रविंदर शास्त्री </div>
+
     <style>
    body {
     -webkit-user-select: none;
