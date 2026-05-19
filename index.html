@@ -39,7 +39,8 @@
 </head>
 <body>
      <a href="https://forms.gle/EgMK6t7y5tUAefeA7"><button class="btn btn-danger">निरीक्षण करें</button></a>
-     <!-- Translator in one line -->
+    <hr>
+    <!-- Translator in one line -->
 <div class="translate-box">
  </div>
  <style>
@@ -87,7 +88,6 @@ function googleTranslateElementInit() {
     );
 }
 </script>
-<hr>
 <style> 
  
  
@@ -162,16 +162,15 @@ h2{
 
 .input-box{
     margin-bottom:18px;
-    background-color: lawngreen;
-}
+    background-color: green;
+ }
 
 label{
-    display:block;
+    color: white;
     margin-left: 2cm;
-    margin-bottom:8px;
+     margin-bottom:8px;
     font-weight:bold;
-    color:red;
-}
+ }
 
 input,
 textarea{
@@ -187,9 +186,8 @@ textarea{
     resize:none;
     height:70px;
 }
-
-.main-btn{
-    width:220px;
+ .main-btn{
+    width:200px;
     padding:15px;
     border:none;
     border-radius:14px;
@@ -212,8 +210,8 @@ textarea{
 }
  
 .limit-box{
+    margin-top:18px;
     height: 200px;
-    margin-top:10px;
      background:#ecfdf5;
     color:#065f46;
     padding:12px;
@@ -276,10 +274,10 @@ textarea{
         </div>
 
         <div class="input-box">
-            <label>संदेह---</label>
+            <label>संदेह लिखें</label>
             <textarea 
             id="message"
-            placeholder="अपने संदेह लिखें।"></textarea>
+            placeholder="अपना संदेह यहाँ लिखें..."></textarea>
         </div>
 
         <button type="submit" class="main-btn">
@@ -289,7 +287,7 @@ textarea{
     </form>
 
     <div class="limit-box">
-        इस तारीख को अधिकतम 15 बुकिंग की अनुमति है।
+        चुनी गई तारीख पर केवल 15 अपॉइंटमेंट बुकिंग की अनुमति है।
     </div>
 
  </div>
@@ -372,7 +370,7 @@ ${message}`;
 
     // WHATSAPP LINK
     let whatsappURL =
-`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+`https://wa.me/${9813132098}?text=${encodeURIComponent(text)}`;
 
     // SUCCESS MESSAGE
     alert(
