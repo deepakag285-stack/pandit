@@ -39,11 +39,9 @@
 </head>
 <body>
      <a href="https://forms.gle/EgMK6t7y5tUAefeA7"><button class="btn btn-danger">निरीक्षण करें</button></a>
-    <br>
-    <!-- Translator in one line -->
+     <!-- Translator in one line -->
 <div class="translate-box">
-     <div id="google_translate_element"></div><b>Select Language:</b>
-</div>
+ </div>
  <style>
 #google_translate_element {
     display: inline-block;
@@ -89,6 +87,7 @@ function googleTranslateElementInit() {
     );
 }
 </script>
+<hr>
 <style> 
  
  
@@ -163,13 +162,15 @@ h2{
 
 .input-box{
     margin-bottom:18px;
+    background-color: lawngreen;
 }
 
 label{
     display:block;
+    margin-left: 2cm;
     margin-bottom:8px;
     font-weight:bold;
-    color:#374151;
+    color:red;
 }
 
 input,
@@ -188,7 +189,7 @@ textarea{
 }
 
 .main-btn{
-    width:100%;
+    width:220px;
     padding:15px;
     border:none;
     border-radius:14px;
@@ -199,10 +200,7 @@ textarea{
     font-weight:bold;
     transition:0.3s;
 }
-#appointmentForm{
-    margin-left: 1cm;
- }
-.main-btn:hover{
+ .main-btn:hover{
     background:#1eb85a;
 }
 
@@ -214,7 +212,8 @@ textarea{
 }
  
 .limit-box{
-    margin-top:18px;
+    height: 200px;
+    margin-top:10px;
      background:#ecfdf5;
     color:#065f46;
     padding:12px;
@@ -257,30 +256,30 @@ textarea{
     <form id="appointmentForm">
 
         <div class="input-box">
-            <label>Your Name</label>
+            <label>आपका नाम</label>
             <input type="text" id="name" required>
         </div>
 
         <div class="input-box">
-            <label>Phone Number</label>
+            <label>फ़ोन नंबर</label>
             <input type="tel" id="phone" required>
         </div>
 
         <div class="input-box">
-            <label>Select Date</label>
+            <label>तारीख़ चुनें</label>
             <input type="date" id="date" required>
         </div>
 
         <div class="input-box">
-            <label>Select Time</label>
+            <label>समय चुनें</label>
             <input type="time" id="time" required>
         </div>
 
         <div class="input-box">
-            <label>Message</label>
+            <label>संदेह---</label>
             <textarea 
             id="message"
-            placeholder="Write your message"></textarea>
+            placeholder="अपने संदेह लिखें।"></textarea>
         </div>
 
         <button type="submit" class="main-btn">
@@ -290,7 +289,7 @@ textarea{
     </form>
 
     <div class="limit-box">
-        Maximum 15 appointments allowed per day
+        इस तारीख को अधिकतम 15 बुकिंग की अनुमति है।
     </div>
 
  </div>
@@ -423,7 +422,7 @@ ${message}`;
      font-size: 40px;
     cursor: pointer;
 }
-</style>z
+</style>
 <script> 
 function closeImage() {
     document.getElementById("imageOverlay").style.display = "none";
