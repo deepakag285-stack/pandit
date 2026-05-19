@@ -89,7 +89,306 @@ function googleTranslateElementInit() {
     );
 }
 </script>
+<style> 
+ 
+ 
+/* POPUP */
 
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.popup-box{
+    background:white;
+    width:90%;
+    max-width:400px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    animation:popupShow 0.4s ease;
+}
+
+@keyframes popupShow{
+    from{
+        transform:scale(0.7);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.popup-box h3{
+    color:#111827;
+    margin-bottom:15px;
+    font-size:25px;
+}
+
+.popup-box p{
+    color:#4b5563;
+    line-height:1.7;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.popup-box button{
+    background:#25D366;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* MAIN CONTAINER */
+
+ 
+h2{
+     margin-bottom:25px;
+    color:#111827;
+    font-size:32px;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#374151;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+textarea{
+    resize:none;
+    height:70px;
+}
+
+.main-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#25D366;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+#appointmentForm{
+    margin-left: 1cm;
+ }
+.main-btn:hover{
+    background:#1eb85a;
+}
+
+.note{
+    text-align:center;
+    margin-top:15px;
+    color:#6b7280;
+    font-size:14px;
+}
+ 
+.limit-box{
+    margin-top:18px;
+     background:#ecfdf5;
+    color:#065f46;
+    padding:12px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+    <div class="popup-box">
+
+        <h3>📅 अपॉइंटमेंट सूचना</h3>
+
+        <p>
+            आपकी अपॉइंटमेंट बुक करने के बाद 
+            आचार्य जी आपसे आपकी अपॉइंटमेंट 
+            डेट पर फोन करके बात करेंगे।
+        </p>
+
+        <button onclick="closePopup()">
+            ठीक है
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MAIN FORM -->
+
+<div class="container">
+
+ 
+    <form id="appointmentForm">
+
+        <div class="input-box">
+            <label>Your Name</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="input-box">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" required>
+        </div>
+
+        <div class="input-box">
+            <label>Select Date</label>
+            <input type="date" id="date" required>
+        </div>
+
+        <div class="input-box">
+            <label>Select Time</label>
+            <input type="time" id="time" required>
+        </div>
+
+        <div class="input-box">
+            <label>Message</label>
+            <textarea 
+            id="message"
+            placeholder="Write your message"></textarea>
+        </div>
+
+        <button type="submit" class="main-btn">
+            अपनी अपॉइंटमेंट बुक करें।
+        </button>
+
+    </form>
+
+    <div class="limit-box">
+        Maximum 15 appointments allowed per day
+    </div>
+
+ </div>
+
+<script>
+
+// CLOSE POPUP
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+
+// DAILY LIMIT
+const DAILY_LIMIT = 15;
+
+// GET SAVED DATA
+let appointments =
+JSON.parse(localStorage.getItem("appointments")) || {};
+
+// FORM SUBMIT
+document.getElementById("appointmentForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let name =
+    document.getElementById("name").value;
+
+    let phone =
+    document.getElementById("phone").value;
+
+    let date =
+    document.getElementById("date").value;
+
+    let time =
+    document.getElementById("time").value;
+
+    let message =
+    document.getElementById("message").value;
+
+    // CHECK DATE
+    if(!appointments[date]){
+        appointments[date] = 0;
+    }
+
+    // LIMIT CHECK
+    if(appointments[date] >= DAILY_LIMIT){
+
+        alert(
+         "माफ़ कीजिए! इस तारीख के लिए 15 अपॉइंटमेंट पहले ही बुक हो चुके हैं।"
+        );
+
+        return;
+    }
+
+    // SAVE COUNT
+    appointments[date]++;
+
+    localStorage.setItem(
+        "appointments",
+        JSON.stringify(appointments)
+    );
+
+    // YOUR WHATSAPP NUMBER
+    let whatsappNumber = "919813132098";
+
+    // MESSAGE
+    let text =
+`📅 New Appointment Booking
+
+👤 Name: ${name}
+
+📞 Phone: ${phone}
+
+📆 Date: ${date}
+
+⏰ Time: ${time}
+
+📝 Message:
+${message}`;
+
+    // WHATSAPP LINK
+    let whatsappURL =
+`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+    // SUCCESS MESSAGE
+    alert(
+    "अपॉइंटमेंट सफलतापूर्वक बुक किया गया! WhatsApp अभी खोला जा रहा है।"
+    );
+
+    // OPEN WHATSAPP
+    window.open(whatsappURL, "_blank");
+
+    // RESET FORM
+    document.getElementById("appointmentForm").reset();
+
+});
+
+</script>
      </div>
 </div>
   <style> 
@@ -124,7 +423,7 @@ function googleTranslateElementInit() {
      font-size: 40px;
     cursor: pointer;
 }
-</style>
+</style>z
 <script> 
 function closeImage() {
     document.getElementById("imageOverlay").style.display = "none";
@@ -232,16 +531,7 @@ function changeSlide(direction) {
 // Optional: Auto-play every 5 seconds
 setInterval(() => changeSlide(1), 2000);
 </script>
-<br><br>
-     <div class="card">
-<div class="form-container">
-    <h3 class= "ajs">अपनी चर्चा लिखें।</h3>
-    <textarea id="problemText" placeholder="अपनी चर्चा लिखें।..."></textarea>
-    <br><br>
-     <button onclick="sendToWhatsapp()">अब भेजें</button>
-</div>
-</div>
-    <style>
+       <style>
         .form-container { max-width: 400px; margin: 20px auto; font-family: Arial; }
         textarea { width: 100%; height: 100px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
         button { background-color: blue; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; }
@@ -250,30 +540,7 @@ setInterval(() => changeSlide(1), 2000);
         color:black;
     }
     </style>
-<script>
-function sendToWhatsapp() {
-    // 1. Get the user's input
-    let problem = document.getElementById("problemText").value;
-    
-    // 2. Your WhatsApp number (International format, no + or 00)
-    let phoneNumber = "919813132098"; // Example: 91 for India + 10-digit number
-    
-    if (problem.trim() === "") {
-        alert("कृपया अपनी समस्या का वर्णन करें, अपनी समस्या लिखने के बाद, आप भेज सकते हैं अन्यथा आप नहीं भेज सकते");
-        return;
-    }
-
-    // 3. Format the message for the URL
-    let encodedMessage = encodeURIComponent("मुझे एक समस्या है-: " + problem);
-    
-    // 4. Create the WhatsApp URL
-    let whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    // 5. Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank').focus();
-}
-</script>
-
+ 
 <br><br>
                 <a  href="https://wa.me/9813132098?text= 1) आचार्य जी प्रणाम। हम अपने बारे में कुछ पूछना चाहते हैं।
   2) आचार्य जी नमस्कार हम कुछ जन्म कुंडली के बारे में जानना चाहते हैं
