@@ -415,6 +415,42 @@ function googleTranslateElementInit() {
      font-size: 40px;
     cursor: pointer;
 }
+ .card {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #23272a, #2c2f33);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth movement ke liye */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Attactive Hover Effect (Side se chipkega aur Upar uthega) --- */
+.card:hover {
+  /* scaleX(0.95) se side se pichkega, translateY(-15px) se upar uthega */
+  transform: translateY(-15px) scaleX(0.95) scaleY(1.02); 
+  box-shadow: 0 20px 35px rgba(0, 255, 204, 0.3); /* Neon glow effect */
+  border-color: #00ffcc;
+  
+  /* Hover karte hi upar-neeche hilne wali animation shuru hogi */
+  animation: floatAround 2s ease-in-out infinite alternate;
+  animation-delay: 0.4s; /* Hover transition khatam hone ke baad shuru hoga */
+}
+
+/* --- Upar-Neeche Hilne Wali Animation (Floating) --- */
+@keyframes floatAround {
+  0% {
+    transform: translateY(-15px) scaleX(0.95) scaleY(1.02);
+  }
+  100% {
+    transform: translateY(-25px) scaleX(0.95) scaleY(1.02); /* Thoda aur upar */
+  }
+}
+        </style>
+
 </style>
 <script> 
 function closeImage() {
