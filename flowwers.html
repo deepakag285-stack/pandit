@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Flowers Effect</title>
+    <style>
+ 
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            z-index: 10; /* Ensures text stays above the flowers */
+            pointer-events: none; /* Allows clicking through text if needed */
+        }
+
+        /* Flower styling */
+        .flower {
+            position: absolute;
+            top: -50px; /* Start just above the screen */
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        /* The falling animation */
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                top: 105vh; /* Fall just past the bottom of the screen */
+                transform: translateX(100px) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Flower Show</h1>
+
+    <script>
+        // Array of different flower emojis/symbols
+        const flowers = ['🌸', '🌸', '💮', '🏵️', '🌹', '🌺', '🌻', '🌼'];
+        
+        // Configuration
+        const flowerCount = 50; // Total number of flowers on screen
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            
+            // Pick a random flower symbol
+            flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            
+            // Randomize starting horizontal position
+            flower.style.left = Math.random() * 100 + 'vw';
+            
+            // Randomize size
+            const size = Math.random() * 20 + 15; // Size between 15px and 35px
+            flower.style.fontSize = size + 'px';
+            
+            // Randomize animation duration (speed) and delay
+            const duration = Math.random() * 5 + 5; // Speed between 5s and 10s
+            const delay = Math.random() * 5; // Delay up to 5s so they don't all drop at once
+            
+            flower.style.animationDuration = duration + 's';
+            flower.style.animationDelay = '-' + delay + 's'; // Negative delay forces instant start
+
+            // Randomize blur for a depth-of-field effect
+            if (Math.random() > 0.6) {
+                flower.style.filter = 'blur(1px)';
+            }
+
+            document.body.appendChild(flower);
+
+            // Remove the flower after its animation cycle to keep DOM clean, then regenerate
+            setTimeout(() => {
+                flower.remove();
+                createFlower();
+            }, (duration) * 1000);
+        }
+
+        // Initialize the flower storm
+        for (let i = 0; i < flowerCount; i++) {
+            // Slight timeout stagger on initial load for a natural feel
+            setTimeout(createFlower, i * 150);
+        }
+    </script>
+</body>
+</html>
