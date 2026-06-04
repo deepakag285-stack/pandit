@@ -19,82 +19,66 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-          <style>
- .flower {
-    position: fixed; /* absolute ki jagah fixed use karein taaki scroll karne par bhi kaam kare */
-    top: -50px; 
-    font-size: 24px;
-    user-select: none;
-    
-    /* Yeh do lines sabse important hain */
-    pointer-events: none; /* Isse aap card ke buttons par aaram se click kar payenge */
-    z-index: 9999;        /* Yeh flowers ko cards aur text ke upar layer karega */
-    
-    animation: fall linear infinite;
-}
+      <style>
+         .flower {
+            position: fixed; 
+            top: -50px; 
+            font-size: 30px; /* Thoda bada size taaki 5 flowers acche se dikhein */
+            user-select: none;
+            pointer-events: none; /* Cards ke buttons kaam karte rahenge */
+            z-index: 9999;        /* Cards ke upar dikhega */
+            animation: fall linear infinite;
+        }
 
-/* Baki ka animation code same rahega */
-@keyframes fall {
-    0% {
-        top: -50px;
-        transform: translateX(0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        top: 105vh; 
-        transform: translateX(100px) rotate(360deg);
-        opacity: 0.4; /* Thoda visible rakhne ke liye opacity badha di hai */
-    }
-}
- </style>
+        /* Speed aur path bilkul fix hai */
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                top: 105vh; 
+                transform: translateX(50px) rotate(360deg);
+                opacity: 0.6;
+            }
+        }
+    </style>
+ 
     <script>
-        // Array of different flower emojis/symbols
-        const flowers = ['🌸', '🌸', '🏵️', '🌹', '🌺', '🌻', '🌼','❤️'];
+        // Flower ki types
+        const flowers = ['🌸', '💮', '🌹', '🌺', '🌻'];
         
-        // Configuration
-        const flowerCount = 50; // Total number of flowers on screen
+        // STRICT CONFIGURATION (Bilkul Fix)
+        const flowerCount = 5; // Sirf 5 flowers girenge
+        const fixSpeed = 7;    // Har flower 7 seconds me niche pahuchega (Fix Time)
 
-        function createFlower() {
+        function createFlower(index) {
             const flower = document.createElement('div');
             flower.classList.add('flower');
             
-            // Pick a random flower symbol
-            flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            // Har ek number ko alag flower mil rha hai
+            flower.innerText = flowers[index % flowers.length];
             
-            // Randomize starting horizontal position
-            flower.style.left = Math.random() * 100 + 'vw';
+            // Screen par alag-alag jagah se girenge (Left se right ke beech me)
+            // 5 flowers hain toh unhe screen par barabar baant diya hai (0%, 20%, 40%, 60%, 80%)
+            flower.style.left = (index * 20) + Math.random() * 5 + 'vw';
             
-            // Randomize size
-            const size = Math.random() * 20 + 15; // Size between 15px and 35px
-            flower.style.fontSize = size + 'px';
+            // Speed bilkul fix (7 seconds)
+            flower.style.animationDuration = fixSpeed + 's';
             
-            // Randomize animation duration (speed) and delay
-            const duration = Math.random() * 5 + 5; // Speed between 5s and 10s
-            const delay = Math.random() * 5; // Delay up to 5s so they don't all drop at once
-            
-            flower.style.animationDuration = duration + 's';
-            flower.style.animationDelay = '-' + delay + 's'; // Negative delay forces instant start
-
-            // Randomize blur for a depth-of-field effect
-            if (Math.random() > 0.6) {
-                flower.style.filter = 'blur(1px)';
-            }
+            // Delay isliye taaki saare 1 saath na giren, aage peeche giren
+            flower.style.animationDelay = (index * 1.2) + 's'; 
 
             document.body.appendChild(flower);
-
-            // Remove the flower after its animation cycle to keep DOM clean, then regenerate
-            setTimeout(() => {
-                flower.remove();
-                createFlower();
-            }, (duration) * 1000);
         }
 
-        // Initialize the flower storm
+        // Loop sirf 5 baar chalega aur fix 5 flowers banayega
         for (let i = 0; i < flowerCount; i++) {
-            // Slight timeout stagger on initial load for a natural feel
-            setTimeout(createFlower, i * 20);
+            createFlower(i);
         }
     </script>
+
 
        <canvas id="wmCanvas"></canvas>
 <script>
