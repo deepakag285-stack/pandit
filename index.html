@@ -37,6 +37,236 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
+    <style> 
+            .testimonial-section {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Top Stars & Heading */
+        .top-stars {
+            color: #ffb400;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .sub-heading {
+            font-size: 16px;
+            color: #555;
+            margin: 0 0 8px 0;
+            font-weight: 500;
+        }
+        .main-heading {
+            font-size: 26px;
+            color: #2c2c2c;
+            margin: 0 0 30px 0;
+            font-weight: 700;
+        }
+
+        /* --- Slider Container (Yahan se chalu hai moving effect) --- */
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden; /* Jo screen se bahar ho wo chhup jaye */
+            padding: 20px 0;
+            background: #f4f7fe;
+            white-space: nowrap; /* Cards ko ek hi line me rakhne ke liye */
+        }
+
+        .track {
+            display: inline-flex;
+            gap: 30px; /* Cards ke beech ka gap */
+            animation: scroll 20s linear infinite; /* 20s matlab speed. Badhaoge toh aur dheere chalega */
+        }
+
+        /* Hover karne par animation ruk jaye taaki log padh sakein */
+        .slider-wrapper:hover .track {
+            animation-play-state: paused;
+        }
+
+        /* Animation Logic */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); /* Aadhe raste par reset hoga seamless loop ke liye */
+            }
+        }
+
+        /* --- Review Card Design --- */
+        .review-card {
+            background: #ffffff;
+            border: 2px solid #512da8;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 350px; /* Card ki fix chaudai */
+            display: inline-block;
+            white-space: normal; /* Card ke andar ka text sahi se wrap ho */
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #ffffff;
+        }
+        .user-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+            background-color: #e0e0e0;
+        }
+        .user-details h3 {
+            margin: 0 0 4px 0;
+            color: #512da8;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .user-stars {
+            color: #ffb400;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .user-location {
+            font-size: 13px;
+            color: #777;
+            margin: 0;
+        }
+
+        /* Card Body */
+        .card-body {
+            background: #512da8;
+            color: #ffffff;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Button */
+        .cta-btn {
+            background: linear-gradient(to right, #e67e22, #512da8);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+    </style>
+      <div class="testimonial-section">
+        <!-- Top Headings -->
+        <div class="top-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="sub-heading"> हज़ारों का भरोसा, अनेकों का प्यार</p>
+        <h2 class="main-heading"> हमारे लोगों की राय</h2>
+
+        <!-- Moving Slider Container -->
+        <div class="slider-wrapper">
+            <div class="track">
+                
+                <!-- CARD 1 -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Rahul Sharma" class="user-img">
+                        <div class="user-details">
+                            <h3>Rahul Sharma</h3>
+                            <div class="user-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="user-location">Singhani</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        "Studying at Arya Sr Sec School Dhigawa Mandi has been an incredible journey. The school offers the best learning experience."
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Amit Kumar" class="user-img">
+                        <div class="user-details">
+                            <h3>Amit Kumar</h3>
+                            <div class="user-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="user-location">Dhigawa</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        "The teachers are very supportive and the environment is excellent for overall development and focus on discipline."
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Priya Singh" class="user-img">
+                        <div class="user-details">
+                            <h3>Priya Singh</h3>
+                            <div class="user-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="user-location">Loharu</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        "Best infrastructure and smart classes make learning fun. I highly recommend this school for high-quality education."
+                    </div>
+                </div>
+
+                <!-- [IMPORTANT] Seamless loop ke liye upar wale saare cards ko ek baar neeche dubara copy-paste karna zaroori hai -->
+                <!-- CARD 1 (Duplicate) -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Rahul Sharma" class="user-img">
+                        <div class="user-details">
+                            <h3>Rahul Sharma</h3>
+                            <div class="user-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="user-location">Singhani</p>
+                        </div>
+                    </div>
+                    <div class="card-body">"Studying at Arya Sr Sec School Dhigawa Mandi has been an incredible journey."</div>
+                </div>
+
+                <!-- CARD 2 (Duplicate) -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Amit Kumar" class="user-img">
+                        <div class="user-details">
+                            <h3>Amit Kumar</h3>
+                            <div class="user-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="user-location">Dhigawa</p>
+                        </div>
+                    </div>
+                    <div class="card-body">"The teachers are very supportive and the environment is excellent."</div>
+                </div>
+
+                <!-- CARD 3 (Duplicate) -->
+                <div class="review-card">
+                    <div class="card-header">
+                        <img src="https://via.placeholder.com/60" alt="Priya Singh" class="user-img">
+                        <div class="user-details">
+                            <h3>Priya Singh</h3>
+                            <div class="user-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="user-location">Loharu</p>
+                        </div>
+                    </div>
+                    <div class="card-body">"Best infrastructure and smart classes make learning fun."</div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
      <style>
          .flower {
             position: fixed; 
