@@ -1,107 +1,283 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved Comments System</title>
-    <style>
-        body { font-family: sans-serif; background: #eef2f3; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
-        input, textarea { width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; background: #2ecc71; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #27ae60; }
+    <title>Document</title>
+ </head>
+ <body>
+    
+ <div class="my-custom-carousel-wrapper">
+    <div class="my-custom-carousel-title">हमारे हमारे यंत्र/किताबें/विचार</div>
+    
+    <!-- Slider Wrapper (Jo buttons ko align karega) -->
+    <div class="my-custom-slider-relative-wrapper">
         
-        #commentSection { width: 100%; max-width: 500px; margin-top: 20px; }
-        .comment-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; gap: 15px; align-items: center; border-left: 5px solid #2ecc71; }
-        .comment-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
-        .info h4 { margin: 0; color: #333; }
-        .info p { margin: 5px 0; color: #666; font-size: 0.9rem; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h3>Post a Comment</h3>
-    <input type="text" id="name" placeholder="Apna Naam likhein" required>
-    <input type="tel" id="phone" placeholder="Phone Number (10 digits)" required>
-    <textarea id="msg" placeholder="Message likhein..." required></textarea>
-    <input type="file" id="image" accept="image/*" required>
-    <button onclick="saveComment()">Comment Post Karein</button>
-</div>
-
-<div id="commentSection">
-    </div>
-
-<script>
-    // Page load hote hi purane comments load karo
-    window.onload = displayComments;
-
-    function saveComment() {
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const msg = document.getElementById('msg').value;
-        const imgFile = document.getElementById('image').files[0];
-
-        // Validation
-        if(!name || !phone || !msg || !imgFile) {
-            alert("Bhai, sabhi fields bharna zaroori hai!");
-            return;
-        }
-        if(phone.length < 10) {
-            alert("Valid phone number daliye!");
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const newComment = {
-                userName: name,
-                userPhone: phone,
-                userMsg: msg,
-                userImg: e.target.result // Base64 image string
-            };
-
-            // Local Storage se purana data nikalo
-            let comments = JSON.parse(localStorage.getItem('myComments')) || [];
+        <!-- Previous Button (Left Arrow) -->
+        <button class="my-custom-nav-btn my-custom-prev-btn" onclick="scrollMySlider(-1)">&#10094;</button>
+        
+        <!-- Horizontal Scrollable Container -->
+        <div class="my-custom-slider-container" id="myCustomSliderContainer">
             
-            // Naya comment add karo
-            comments.push(newComment);
-            
-            // Wapas save karo
-            localStorage.setItem('myComments', JSON.stringify(comments));
-
-            displayComments(); // UI update karo
-            clearForm();
-        };
-        reader.readAsDataURL(imgFile);
-    }
-
-    function displayComments() {
-        const section = document.getElementById('commentSection');
-        const comments = JSON.parse(localStorage.getItem('myComments')) || [];
-        
-        section.innerHTML = '<h3>Sabhi Comments</h3>';
-        
-        comments.reverse().forEach(c => {
-            section.innerHTML += `
-                <div class="comment-card">
-                    <img src="${c.userImg}">
-                    <div class="info">
-                        <h4>${c.userName} <small style="color:gray">(${c.userPhone})</small></h4>
-                        <p>${c.userMsg}</p>
+            <!-- Card 1 -->
+            <div class="my-custom-review-card">
+                <div class="my-custom-card-header">
+                    <img src="images/1000094347.jpg" alt="User Photo" class="my-custom-card-img">
+                    <div class="my-custom-card-info">
+                        <h4 class="my-custom-card-name">Ravi shastri</h4>
+                        <div class="my-custom-card-stars">★★★★★</div>
+                        <p class="my-custom-card-location">kural</p>
+                        <a href="https://wa.me/919813132098/"><button class="my-custom-whatsapp-btn"> contact onWhatsApp</button></a>
                     </div>
                 </div>
-            `;
+                <div class="my-custom-card-details">
+                    वेबसाइट सभी के लिए बहुत उपयोगी है।
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="my-custom-review-card">
+                <div class="my-custom-card-header">
+                    <img src="images/IMG-20260418-WA0005.jpg" alt="User Photo" class="my-custom-card-img">
+                    <div class="my-custom-card-info">
+                        <h4 class="my-custom-card-name">Aman Verma</h4>
+                        <div class="my-custom-card-stars">★★★★★</div>
+                        <p class="my-custom-card-location">Delhi</p>
+                                                <a href="https://wa.me/919813132098/"><button class="my-custom-whatsapp-btn"> contact onWhatsApp</button></a>
+                    </div>
+                </div>
+                <div class="my-custom-card-details">
+                    यह बहुत ही बढ़िया सर्विस है, मुझे इसका इस्तेमाल करके बहुत खुशी हुई।
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="my-custom-review-card">
+                <div class="my-custom-card-header">
+                    <img src="images/Vikram_Singh.jpg" alt="User Photo" class="my-custom-card-img">
+                    <div class="my-custom-card-info">
+                        <h4 class="my-custom-card-name">Vikram Singh</h4>
+                        <div class="my-custom-card-stars">★★★★☆</div>
+                        <p class="my-custom-card-location">Jaipur</p>
+                                                <a href="https://wa.me/919813132098/"><button class="my-custom-whatsapp-btn"> contact onWhatsApp</button></a>
+                    </div>
+                </div>
+                <div class="my-custom-card-details">
+                    बहुत ही आसान इंटरफ़ेस है। हर कोई इसे बिना किसी परेशानी के चला सकता है।
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="my-custom-review-card">
+                <div class="my-custom-card-header">
+                    <img src="images/Sunita_Rao.jpg" alt="User Photo" class="my-custom-card-img">
+                    <div class="my-custom-card-info">
+                        <h4 class="my-custom-card-name">Sunita Rao</h4>
+                        <div class="my-custom-card-stars">★★★★★</div>
+                        <p class="my-custom-card-location">Mumbai</p>
+                                                <a href="https://wa.me/919813132098/"><button class="my-custom-whatsapp-btn"> contact onWhatsApp</button></a>
+                    </div>
+                </div>
+                <div class="my-custom-card-details">
+                    कम समय में बेहतरीन जानकारी देने वाली शानदार वेबसाइट है। धन्यवाद!
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="my-custom-review-card">
+                <div class="my-custom-card-header">
+                    <img src="https://via.placeholder.com/65" alt="User Photo" class="my-custom-card-img">
+                    <div class="my-custom-card-info">
+                        <h4 class="my-custom-card-name">Rajesh Kumar</h4>
+                        <div class="my-custom-card-stars">★★★★★</div>
+                        <p class="my-custom-card-location">Patna</p>
+                                                <a href="https://wa.me/919813132098/"><button class="my-custom-whatsapp-btn"> contact onWhatsApp</button></a>
+                    </div>
+                </div>
+                <div class="my-custom-card-details">
+                    100% उपयोगी! मैंने इसे अपने दोस्तों के साथ भी शेयर किया है।
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Next Button (Right Arrow) -->
+        <button class="my-custom-nav-btn my-custom-next-btn" onclick="scrollMySlider(1)">&#10095;</button>
+    </div>
+</div>
+
+<style>
+    /* Base wrapper matching image background */
+    .my-custom-carousel-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: #ff4500; 
+        font-family: Arial, sans-serif;
+    }
+
+    .my-custom-carousel-title {
+        text-align: center;
+        color: #ffffff;
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    /* Relative wrapper taaki buttons sahi jagah set ho sakein */
+    .my-custom-slider-relative-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Left-to-Right Scrolling Container */
+    .my-custom-slider-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding: 15px 10px;
+        width: 100%;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,255,255,0.5) transparent;
+    }
+
+    /* Hide scrollbar tracks for clean look */
+    .my-custom-slider-container::-webkit-scrollbar {
+        height: 8px;
+    }
+    .my-custom-slider-container::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+    }
+
+    /* Navigation Buttons (Next/Prev) Styling */
+    .my-custom-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(93, 63, 211, 0.9); /* Purple matching layout */
+        color: white;
+        border: 2px solid white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .my-custom-nav-btn:hover {
+        background-color: #4b0082;
+    }
+
+    .my-custom-nav-btn:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+
+    /* Position left and right buttons */
+    .my-custom-prev-btn {
+        left: -15px;
+    }
+
+    .my-custom-next-btn {
+        right: -15px;
+    }
+
+    /* Individual Card Style */
+    .my-custom-review-card {
+        flex: 0 0 300px; 
+        background-color: #ffffff;
+        border-radius: 12px;
+        border: 2px solid #5d3fd3; 
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .my-custom-card-header {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background-color: #ffffff;
+        gap: 15px;
+    }
+
+    .my-custom-card-img {
+        width: 65px;
+        height: 65px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+    }
+
+    .my-custom-card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .my-custom-card-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #4b0082;
+        margin: 0;
+    }
+
+    .my-custom-card-stars {
+        color: #ffcc00;
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .my-custom-card-location {
+        font-size: 13px;
+        color: #777777;
+        margin: 0;
+    }
+
+    .my-custom-card-details {
+        background-color: #5d3fd3; 
+        color: #ffffff;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 1.5;
+        flex-grow: 1;
+        min-height: 100px;
+    }
+
+    /* Responsive adjustments for mobile so buttons don't clip outside screen */
+    @media (max-width: 600px) {
+        .my-custom-prev-btn { left: 5px; }
+        .my-custom-next-btn { right: 5px; }
+        .my-custom-review-card { flex: 0 0 260px; } /* Mobile par card thoda chhota */
+    }
+</style>
+
+<script>
+    // Buttons par click karne par left-right scroll karne ka logic
+    function scrollMySlider(direction) {
+        const container = document.getElementById('myCustomSliderContainer');
+        // Ek baar me kitna scroll hoga (Card width + gap = 320px)
+        const scrollAmount = 320; 
+        
+        container.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
         });
     }
-
-    function clearForm() {
-        document.getElementById('name').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('msg').value = '';
-        document.getElementById('image').value = '';
-    }
 </script>
+ </body>
+ </html><!-- Main Wrapper Section -->
 
-</body>
-</html>
