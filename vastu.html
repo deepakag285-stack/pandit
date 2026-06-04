@@ -52,7 +52,7 @@
         const flowers = ['🌸', '🌸', '🏵️', '🌹', '🌺', '🌻', '🌼','❤️'];
         
         // Configuration
-        const flowerCount = 500; // Total number of flowers on screen
+        const flowerCount = 50; // Total number of flowers on screen
 
         function createFlower() {
             const flower = document.createElement('div');
@@ -92,7 +92,7 @@
         // Initialize the flower storm
         for (let i = 0; i < flowerCount; i++) {
             // Slight timeout stagger on initial load for a natural feel
-            setTimeout(createFlower, i * 150);
+            setTimeout(createFlower, i * 20);
         }
     </script>
 
