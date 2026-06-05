@@ -1,0 +1,190 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 Sacred Yantras</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-width: 300px;
+            --card-height: 450px;
+        }
+
+ 
+        /* Slider Container */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0 150px 0; /* Extra bottom padding for the reflection */
+            position: relative;
+        }
+
+        /* Track that holds the cards */
+        .slider-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scrollLeftToRight 45s linear infinite;
+        }
+
+        /* Pause animation on hover so users can read/click */
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Infinite Loop Animation (Moving Left to Right) */
+        @keyframes scrollLeftToRight {
+            0% {
+                transform: translateX(calc(-50%));
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Yantra Card Styling */
+        .yantra-card {
+            width: var(--card-width);
+            height: 350px;
+            border-radius: 20px;
+            padding: 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            color: white;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            /* Box Reflection Effect */
+            -webkit-box-reflect: bottom 15px linear-gradient(transparent, transparent 60%, rgba(255, 255, 255, 0.15));
+        }
+
+        /* Card Image */
+        .yantra-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Card Content */
+        .yantra-name {
+            font-size: 1.5rem;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .yantra-desc {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            background-color: #20ba5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-track" id="yantra-track">
+            </div>
+    </div>
+
+    <script>
+        // Data for the 14 Yantras with distinct vibrant gradients
+        const yantras = [
+            { name: "श्री यंत्र", desc: "शक्ति, धन और परम समृद्धि का परम स्रोत.", color: "linear-gradient(135deg, #ff0055, #7000ff)", img: "https://picsum.photos/200?random=1" },
+            { name: "कुबेर यंत्र", desc: "कोस्मिक धन, सम्पति और छिपे हुए आर्थिक संसाधनों को आकर्षित करता है.", color: "linear-gradient(135deg, #fbc2eb, #a6c1ee)", img: "https://picsum.photos/200?random=2" },
+            { name: "महालक्ष्मी यंत्र", desc: "अतिरिक्तता, निरंतर अच्छी दुनिया और पारिवारिक सुख लाता है.", color: "linear-gradient(135deg, #ff9a9e, #fecfef)", img: "https://picsum.photos/200?random=3" },
+            { name: "गणेश यंत्र", desc: "सभी अवरोधों को हटाता है और नए प्रयासों को सफलता के साथ आशीर्वाद देता है.", color: "linear-gradient(135deg, #f6d365, #fda085)", img: "https://picsum.photos/200?random=4" },
+            { name: "सरस्वती यंत्र", desc: "ज्ञान, बुद्धि, मेमोरी और कला कौशल को प्रभावित करता है.", color: "linear-gradient(135deg, #84fab0, #8fd3f4)", img: "https://picsum.photos/200?random=5" },
+            { name: "महामृत्युंजय यंत्र", desc: "सुरक्षा, अंतिम स्वास्थ्य और डर से मुक्ति प्रदान करता है.", color: "linear-gradient(135deg, #a1c4fd, #c2e9fb)", img: "https://picsum.photos/200?random=6" },
+            { name: "नवग्रह यंत्र", desc: "संतुलन देता है सभी 9 ग्रहों की ऊर्जाओं के लिए शांति और संतुलन.", color: "linear-gradient(135deg, #ff0844, #ffb199)", img: "https://picsum.photos/200?random=7" },
+            { name: "सूर्य यंत्र", desc: "देता है चमक, महत्वपूर्ण स्वास्थ्य, नेतृत्व और सार्वजनिक प्रतिष्ठा.", color: "linear-gradient(135deg, #f12711, #f5af19)", img: "https://picsum.photos/200?random=8" },
+            { name: "दुर्गा यंत्र", desc: "सुरक्षा के खिलाफ होता है नकारात्मक ऊर्जाओं, दुष्ट आंखों और मित्रों.", color: "linear-gradient(135deg, #667eea, #764ba2)", img: "https://picsum.photos/200?random=9" },
+            { name: "हनुमान यंत्र", desc: "देता है अद्वितीय साहस, शारीरिक सेना, और मानसिक प्रयोगशाला.", color: "linear-gradient(135deg, #ff4e50, #f9d423)", img: "https://picsum.photos/200?random=10" },
+            { name: "गायत्री यंत्र", desc: "शुद्ध करता है मन और प्रकाशित करता है प्रभु के प्रकाश के साथ.", color: "linear-gradient(135deg, #00c6ff, #0072ff)", img: "https://picsum.photos/200?random=11" },
+            { name: "वस्तु यंत्र", desc: "सही करता है कोसमिक ऊर्जा की कमीयों कोघरों मेंऔर कार्यक्षेत्रों में.", color: "linear-gradient(135deg, #11998e, #38ef7d)", img: "https://picsum.photos/200?random=12" },
+            { name: "बगलामुखी यंत्र", desc: "निश्चित करता है विजय के समझौते में कानूनी सवालोंऔर मचले हुए प्रतिद्वंद्वीओं.", color: "linear-gradient(135deg, #fc00ff, #00dbde)", img: "https://picsum.photos/200?random=13" },
+            { name: "श्री व्यापार वृद्धि", desc: "बढ़ावे के सभी पहलुओं मेंव्यवसथपटि продажи, коммерческий рост и оборот клиентов.", color: "linear-gradient(135deg, #ffe259, #ffa751)", img: "https://picsum.photos/200?random=14" }
+        ];
+
+        // Your WhatsApp phone number (Include country code, no spaces or special characters)
+        const whatsappNumber = "919813132098"; 
+
+        const track = document.getElementById('yantra-track');
+
+        // Function to build card HTML
+        function createCardHtml(yantra) {
+            const message = encodeURIComponent(`Hello, I would like to order the sacred ${yantra.name}. Please provide details.`);
+            const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            return `
+                <div class="yantra-card" style="background: ${yantra.color}">
+                    <img class="yantra-img" src="${yantra.img}" alt="${yantra.name}">
+                    <div class="yantra-name">${yantra.name}</div>
+                    <div class="yantra-desc">${yantra.desc}</div>
+                    <a href="${waLink}" target="_blank" class="whatsapp-btn">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle;">
+                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.98c-.202-.101-1.194-.588-1.378-.653-.185-.069-.32-.103-.454.101-.132.203-.513.652-.629.784-.117.135-.234.15-.436.05-2.046-1.023-3.155-2.261-3.821-3.411-.175-.302.175-.281.5-.917.06-.113.03-.214-.015-.315-.045-.1-.454-1.092-.622-1.498-.164-.395-.33-.342-.454-.349-.118-.006-.253-.007-.388-.007a.75.75 0 0 0-.544.253C4.544 3.84 4 4.364 4 5.438c0 1.074.78 2.112.889 2.26 0 .149 1.533 2.339 3.716 3.28 1.056.455 1.83.729 2.457.928.718.228 1.372.196 1.89.118.577-.087 1.194-.488 1.362-.96.168-.472.168-.875.118-.96-.05-.085-.185-.135-.387-.235z"/>
+                        </svg>
+                        Order on WhatsApp
+                    </a>
+                </div>
+            `;
+        }
+
+        // To make a flawless loop, we render the 14 cards twice inside the track
+        function initSlider() {
+            let trackContent = "";
+            
+            // First set of 14 cards
+            yantras.forEach(yantra => {
+                trackContent += createCardHtml(yantra);
+            });
+            
+            // Second set of 14 cards (clones for seamless looping)
+            yantras.forEach(yantra => {
+                trackContent += createCardHtml(yantra);
+            });
+            
+            track.innerHTML = trackContent;
+        }
+
+        initSlider();
+    </script>
+</body>
+</html>
+
