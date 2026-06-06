@@ -4,8 +4,8 @@
   "description": "This is my first installable website on GitHub Pages!",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme-color": "#317EFB",
+  "background_color": "green",
+  "theme_color": "#317EFB",
   "icons": [
     {
       "src": "images/1000103410.jpg",
