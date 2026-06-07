@@ -1783,4 +1783,15 @@ setInterval(() => changeSlide(1), 2000);
                 z-index: 1000;
              }
  </style>
+ <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // GitHub Pages के पाथ की समस्या से बचने के लिए './sw.js' लिखा है
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker Successfully Registered!', reg))
+                    .catch(err => console.error('Service Worker Registration Failed:', err));
+            });
+        }
+    </script>
+ </body>
 </html>
