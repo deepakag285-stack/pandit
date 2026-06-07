@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>🔮 Astro Portal - User Page</title>
+    <style>
+         .box { max-width: 500px; margin: 20px auto; background: #162447; padding: 30px; border-radius: 12px; box-shadow: 0 0 15px rgba(233,69,96,0.4); text-align: left; }
+        .profile { text-align: center; margin-bottom: 20px; }
+        .profile img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #e94560; }
+        input, textarea, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        input, textarea { background: #1a1a2e; color: #fff; border: 1px solid #1f4068; }
+        button { background: #e94560; color: #fff; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .token-box { background: #28a745; padding: 15px; border-radius: 5px; margin-top: 15px; display: none; text-align: center; }
+        .reply-box { margin-top: 20px; padding: 15px; background: #1f4068; border-left: 5px solid #28a745; display: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: SUBMIT DETAILS -->
+    <div class="box">
+        <div class="profile">
+            <img src="images/IMG-20260420-WA0003.jpg" alt="Acharya Ji" onerror="this.src='https://via.placeholder.com/90?text=Jyotishi'">
+            <h2>Acharya Ji Portal</h2>
+            <p style="color: #bbb;">Apni Kundli details niche bharein</p>
+        </div>
+
+        <input type="text" id="name" placeholder="Aapka Naam" required>
+        <input type="date" id="dob" required>
+        <input type="time" id="tob" required>
+        <input type="text" id="pob" placeholder="Janam Sthan (City, State)" required>
+        <textarea id="question" rows="3" placeholder="Aapka Sawaal..." required></textarea>
+        <button onclick="submitDetails()">Acharya Ji Ko Bhejein ✨</button>
+
+        <div id="tokenArea" class="token-box">
+            <p><strong>Aapka Sawaal Bhej Diya Gaya Hai!</strong></p>
+            <p>अपना जवाब देखने के लिए इस टोकन आईडी को कॉपी कर लें:</p>
+            <h3 id="tokenID" style="background:#1a1a2e; padding:5px; letter-spacing:1px; color:#ff6b81;"></h3>
+        </div>
+    </div>
+
+    <!-- SECTION 2: CHECK REPLY -->
+    <div class="box" style="border-top: 4px solid #e94560;">
+        <h3 style="text-align: center; color: #e94560; margin-top: 0;">🔮अपना जवाब देखें</h3>
+        <input type="text" id="userToken" placeholder="Yahan apna Token ID dalein">
+        <button style="background:#28a745;" onclick="checkReply()">जवाब देखें ✨</button>
+
+        <div id="replyArea" class="reply-box">
+            <h4 id="resName" style="margin-top:0; color:#ff6b81;"></h4>
+            <p><strong>Aapka Sawaal:</strong> <span id="resQuestion"></span></p>
+            <hr style="border-color:#162447;">
+            <p><strong>Acharya Ji Ka Jawab:</strong></p>
+            <p id="resReply" style="white-space: pre-wrap; font-style: italic; color: #28a745; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <script>
+        // 1. Details submit karne ke liye
+        function submitDetails() {
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const tob = document.getElementById('tob').value;
+            const pob = document.getElementById('pob').value;
+            const question = document.getElementById('question').value;
+
+            if(!name || !question) { alert("Kripya Naam aur Sawaal bharein!"); return; }
+
+            // Random 6 digit ka unique token banana
+            const uniqueToken = "ASTRO" + Math.floor(100000 + Math.random() * 900000);
+
+            const newRequest = {
+                id: uniqueToken,
+                name: name,
+                dob: dob,
+                tob: tob,
+                pob: pob,
+                question: question,
+                reply: "",
+                status: "Pending"
+            };
+
+            // LocalStorage me save karna
+            let allRequests = JSON.parse(localStorage.getItem('localAstroRequests')) || [];
+            allRequests.push(newRequest);
+            localStorage.setItem('localAstroRequests', JSON.stringify(allRequests));
+
+            // Token dikhana
+            document.getElementById('tokenID').innerText = uniqueToken;
+            document.getElementById('tokenArea').style.display = "block";
+
+            // Clear inputs
+            document.getElementById('name').value = '';
+            document.getElementById('question').value = '';
+        }
+
+        // 2. User apna reply check karega
+        function checkReply() {
+            const token = document.getElementById('userToken').value.trim();
+            if(!token) { alert("Pehle Token ID dalein!"); return; }
+
+            let allRequests = JSON.parse(localStorage.getItem('localAstroRequests')) || [];
+            // Token se match karta hua data dundhna
+            const myData = allRequests.find(req => req.id === token);
+
+            if(myData) {
+                document.getElementById('resName').innerText = "Pranam " + myData.name + " Ji,";
+                document.getElementById('resQuestion').innerText = myData.question;
+                
+                if(myData.reply) {
+                    document.getElementById('resReply').innerText = myData.reply;
+                    document.getElementById('resReply').style.color = "#28a745";
+                } else {
+                    document.getElementById('resReply').innerText = "Acharya ji abhi aapki kundli dekh rahe hain, kripya thoda intezar karein... 🔮";
+                    document.getElementById('resReply').style.color = "#ffc107";
+                }
+                document.getElementById('replyArea').style.display = "block";
+            } else {
+                alert("Galat Token ID! Aisi koi request nahi mili.");
+            }
+        }
+    </script>
+</body>
+</html>
+
