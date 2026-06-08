@@ -891,6 +891,50 @@ function closeImage() {
     <h1 class="prev" onclick="changeSlide(-1)">&#10094;</h1>
     <h1 class="next" onclick="changeSlide(1)">&#10095;</h1>
 </div>
+<!--visitors numbers-->
+    <div class="sticky-counter">
+  <div class="gradient-circle">
+    <span class="label">VISITORS</span>
+    <h2 id="visitor-count">0</h2>
+  </div>
+</div>
+
+<style>
+  /* Sticky Position - Top Right Corner */
+  .sticky-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999; /* Taaki ye sabse upar dikhe */
+  }
+
+  .gradient-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff00cc, #3333ff);
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 3px solid white;
+  }
+
+  .label { font-size: 8px; text-transform: uppercase; }
+  #visitor-count { font-size: 20px; margin: 2px 0; }
+</style>
+
+<script>
+  // Logic
+  let count = localStorage.getItem('totalVisitors') || 0;
+  count = parseInt(count) + 1;
+  localStorage.setItem('totalVisitors', count);
+  document.getElementById('visitor-count').innerText = count;
+</script>
+
                 <!-- images show first after open index page -->
      <div id="imageOverlay" class="overlay">
     <div class="modal-content">
