@@ -20,25 +20,6 @@
 </head>
 <body>
        <canvas id="wmCanvas"></canvas>
-<script>
-let canvas = document.getElementById("wmCanvas");
-let ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let text = " पं रविंदर   | " + new Date().toLocaleString();
-
-ctx.font = "20px Arial";
-ctx.fillStyle = "rgba(0.3,0.3,0.3,0.3)";
-ctx.rotate(-0.5);
-
-for (let x = -500; x < canvas.width; x += 300) {
-    for (let y = 0; y < canvas.height; y += 150) {
-        ctx.fillText(text, x, y);
-    }
-}
-</script>
 
        <div class="translate-box">
      <div id="google_translate_element"></div><b>Select Language:</b>
