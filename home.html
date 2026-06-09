@@ -116,19 +116,7 @@
 
  </style>
 <script>
-   document.addEventListener('contextmenu', e => e.preventDefault());
 
-   document.addEventListener('keydown', function(e) {
-    if (
-      e.keyCode === 123 || // F12
-      (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) || // Ctrl+U, S, P
-      (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) // Ctrl+I/J/C
-    ) {
-      e.preventDefault();
-      alert("Security Alert: Content is Protected!");
-      return false;
-    }
-  });
    document.addEventListener('keyup', (e) => {
     if (e.key === 'PrintScreen') {
       navigator.clipboard.writeText(''); // क्लिपबोर्ड खाली करना
@@ -143,15 +131,7 @@
   }, 1000);
  </script>
 
-  <script>
-document.addEventListener("contextmenu", (e) => e.preventDefault());
-
-document.onkeydown = function(e) {
-  if (e.keyCode == 123) return false; // F12
-  if (e.ctrlKey && e.shiftKey && e.keyCode == 73) return false; // Ctrl+Shift+I
-  if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
-};
-</script>
+  
   <div class="translate-box">
      <div id="google_translate_element"></div><b>Select Language:</b>
 </div>
