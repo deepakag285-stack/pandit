@@ -14,8 +14,11 @@ self.addEventListener('fetch', (event) => {
     // अभी हम सीधे इंटरनेट से फाइलें लोड होने दे रहे हैं
     event.respondWith(fetch(event.request));
 });
-self.registration.showNotification("", {
-  body: "आचार्य रविंदर शास्त्री 11 जून से 15 जून तक धांगड़ (भिवानी) में उपस्थित रहेंगे",
-  icon: "images/1000103410.jpg",
-  badge: "images/1000103410.jpg"
+self.addEventListener('install', (e) => self.skipWaiting());
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(clients.openWindow('/'));
 });
+
+ 
