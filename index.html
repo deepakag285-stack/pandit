@@ -1818,7 +1818,7 @@ setInterval(() => changeSlide(1), 2000);
 
     async function checkForUpdates() {
       try {
-        const response = await fetch('data.json');
+        const response = await fetch('/data.json');
         const data = await response.json();
 
         // Agar purane title se naya title alag hai, toh notify karein
