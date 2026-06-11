@@ -14,3 +14,8 @@ self.addEventListener('fetch', (event) => {
     // अभी हम सीधे इंटरनेट से फाइलें लोड होने दे रहे हैं
     event.respondWith(fetch(event.request));
 });
+self.registration.showNotification("Welcome!", {
+  body: "Humara PWA khul gaya hai!",
+  icon: "/images/1000103410.jpg",
+  badge: "/badge.png"
+});

@@ -1795,5 +1795,24 @@ setInterval(() => changeSlide(1), 2000);
             });
         }
     </script>
+    <script> 
+    if ("Notification" in window) {
+  Notification.requestPermission().then((permission) => {
+    if (permission === "granted") {
+      console.log("Notification permission granted!");
+    }
+  });
+}
+window.addEventListener('load', () => {
+  if (Notification.permission === 'granted') {
+    navigator.serviceWorker.ready.then((registration) => {
+      registration.showNotification('Hello!', {
+        body: 'App successfully load ho gayi hai.',
+        icon: '/icon-192.png'
+      });
+    });
+  }
+});
+</script>
  </body>
 </html>
