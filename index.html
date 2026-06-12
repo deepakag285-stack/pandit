@@ -1814,22 +1814,24 @@ setInterval(() => changeSlide(1), 2000);
     Notification.requestPermission();
 
     // 3. Polling: Har 30 seconds mein data.json check karein
-    let lastKnownTitle = "";
+ let lastKnownBody = ""; // Pehle body kuch nahi thi
 
-    async function checkForUpdates() {
-      try {
-        const response = await fetch('data.json');
-        const data = await response.json();
+async function checkForUpdates() {
+  try {
+    const response = await fetch('data.json');
+    const data = await response.json();
 
-        // Agar purane title se naya title alag hai, toh notify karein
-        if (data.title !== lastKnownTitle) {
-          lastKnownTitle = data.title;
-          showNotif(data.title, data.body);
-        }
-      } catch (err) {
-        console.log("Update check fail:", err);
-      }
+    // Check karein kya nayi body purani body se alag hai?
+    if (data.body !== lastKnownBody) {
+      showNotif(data.title, data.body);
+      
+      // Ab nayi body ko save kar lo taake agli baar compare ho sake
+      lastKnownBody = data.body;
     }
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
 
     function showNotif(title, body) {
       if (Notification.permission === 'granted') {
