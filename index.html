@@ -40,32 +40,35 @@ Kundali Dosh remedies, (Manglik Dosh, Kaal Sarp Dosh,acharya ravinder shastri,as
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
  </head>
 <body>
-        <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwELsTJdEvNT5KT8GB7vMCGWahzHm_32U6SKy3M3GCQH0858JqVgh9Y7QNlVKASssgo/exec"; 
-    const startTime = Date.now();
-let visitCount = localStorage.getItem("visitCount") || "0";
-visitCount = parseInt(visitCount) + 1;
-localStorage.setItem("visitCount", visitCount.toString());
-    // Device ka detailed naam nikalne ka function
+ <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwRtFDyMlU5RloW_jRlgtb08GEVG1TgZSkNl8RUmapbyItrFlBsn7s6g3z0C0fZLKdT/exec"; 
+    const entryTime = new Date(); // Site khulne ka exact waqt
+
+    // Visit Count Logic
+    let visitCount = localStorage.getItem('visitCount') || 0;
+    visitCount = parseInt(visitCount) + 1;
+    localStorage.setItem('visitCount', visitCount);
+
     async function getFullDeviceName() {
-        // Modern browsers ke liye (Chrome/Edge/Android)
         if (navigator.userAgentData) {
-            const highEntropyValues = await navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']);
-            return `${highEntropyValues.platform} - ${highEntropyValues.model || 'Unknown Model'}`;
+            const highEntropyValues = await navigator.userAgentData.getHighEntropyValues(['model', 'platform']);
+            return `${highEntropyValues.platform} - ${highEntropyValues.model || 'Unknown'}`;
         }
-        // Purane browsers ke liye fallback
         return navigator.userAgent.split('(')[1].split(')')[0]; 
     }
 
     async function sendData() {
-        const stayDuration = Math.round((Date.now() - startTime) / 1000) + " seconds";
-        const deviceName = await getFullDeviceName(); // Device name fetch karein
+        const exitTime = new Date(); // Site chhodne ka exact waqt
+        const stayDuration = Math.round((exitTime - entryTime) / 1000) + " seconds";
+        const deviceName = await getFullDeviceName();
         
         const log = {
-            time: new Date().toLocaleTimeString(),
+            date: exitTime.toLocaleDateString(),
+            entry: entryTime.toLocaleTimeString(),
+            exit: exitTime.toLocaleTimeString(), // Exit time add kiya
             device: deviceName,
             duration: stayDuration,
-            visits:visitCount
+            visits: visitCount
         };
         
         fetch(WEB_APP_URL, {
