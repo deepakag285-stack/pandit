@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        input { padding: 12px; width: 80%; margin: 15px 0; border: 2px solid #ddd; border-radius: 10px; }
+        button { padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; display: none; }
+        
+        /* Modal Styles */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 25px; border-radius: 15px; width: 80%; max-width: 400px; animation: zoomIn 0.3s; text-align: center; }
+        @keyframes zoomIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h3>तिथियां और त्योहार</h3>
+    <input type="date" id="dateInput">
+    <button id="showBtn" onclick="showFestival()">त्योहार देखें</button>
+    <p id="msg"></p>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h2 id="f-name"></h2>
+        <img id="f-img" src="" alt="Festival">
+        <p id="f-desc"></p>
+        <button onclick="closeModal()" style="display:block; margin:auto; background:#e74c3c;">Close</button>
+    </div>
+</div>
+
+<script>
+    const festivals = {
+        "2026-07-14": { name: "आषाढ़ अमावस्या", desc: "आषाढ़ अमावस्या पर सुबह स्नान के बाद पितरों का तर्पण करें\\n\\nभिवानी । आषाढ़ मास की अमावस्या 14 जुलाई को मनाई जाएगी। धार्मिक दृष्टि से यह दिन पितरों के तर्पण, श्राद्ध, दान-पुण्य के लिए पुण्यदायी माना गया है।\\n\\nआचार्य रविंद्र शास्त्री ने बताया कि इस दिन विधि-विधान से किए गए धार्मिक कार्य सीधे पितरों तक पहुंचते हैं। इससे पितृदोष के प्रभाव में कमी आती है और परिवार में सुख, शांति और समृद्धि का वास होता है। उन्होंने बताया कि अमावस्या तिथि 13 जुलाई को शाम छह बजकर 49 मिनट से शुरू होकर 14 जुलाई दोपहर तीन बजकर 12 मिनट पर समाप्त होगी।\\n\\nउदया तिथि के अनुसार अमावस्या व्रत और पूजा 14 जुलाई को की जाएगी। आषाढ़ अमावस्या के दिन प्रातःकाल स्नान के बाद पितरों का तर्पण करें। पीपल वृक्ष पर जल अर्पित कर दीपक जलाएं तथा परिक्रमा करें। इसके साथ ही जरूरतमंदों को अन्न, वस्त्र, फल एवं दक्षिणा का दान करना अत्यंत शुभ माना गया है।\\n\\nगाय, कौए और कुत्ते को भोजन कराने का भी विशेष महत्व बताया गया है। धार्मिक मान्यताओं के अनुसार इन उपायों से पितरों की कृपा प्राप्त होती है, घर में सकारात्मक ऊर्जा का संचार होता है और जीवन की अनेक बाधाएं दूर होती हैं।",
+  img: "images/images.jpeg" },
+     };
+
+    let selectedKey = "";
+
+    document.getElementById('dateInput').addEventListener('change', function() {
+        const date = new Date(this.value);
+        selectedKey = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+        const btn = document.getElementById('showBtn');
+        const msg = document.getElementById('msg');
+
+        if (festivals[selectedKey]) {
+            btn.style.display = 'inline-block';
+            msg.innerText = "त्योहार मिल गया! बटन पर क्लिक करें।";
+        } else {
+            btn.style.display = 'none';
+            msg.innerText = "इस दिन कोई विशेष त्योहार नहीं है।";
+        }
+    });
+
+    function showFestival() {
+        document.getElementById('f-name').innerText = festivals[selectedKey].name;
+        document.getElementById('f-desc').innerText = festivals[selectedKey].desc;
+        document.getElementById('f-img').src = festivals[selectedKey].img;
+        document.getElementById('myModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
+
