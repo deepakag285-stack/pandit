@@ -1,0 +1,86 @@
+ <!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Astrology Festival Calendar</title>
+        <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <style>
+        :root { --gold: #d4af37; --bg: #0f3460; }
+        body { font-family: 'Georgia', serif; background: #f4f4f4; padding: 20px; }
+        
+        table { width: 100%; max-width: 700px; margin: auto; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        th { background: var(--bg); color: var(--gold); padding: 15px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid #ddd; cursor: pointer; transition: 0.3s; }
+        tr:hover { background: #f0f0f0; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 25px; border-radius: 15px; width: 90%; max-width: 450px; max-height: 80vh; display: flex; flex-direction: column; border: 4px solid var(--gold); position: relative; }
+        
+        #m-desc { max-height: 300px; overflow-y: auto; padding-right: 10px; margin: 15px 0; text-align: justify; line-height: 1.6; spellcheck: false; }
+        #m-desc::-webkit-scrollbar { width: 6px; }
+        #m-desc::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        .close-btn { padding: 10px; background: var(--bg); color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center; color: var(--bg);">शुभ तिथियां एवं त्यौहार</h2>
+<h2>देखने के लिए किसी भी तारीख पर क्लिक करें।</h2>
+
+<table id="fest-table">
+    <thead><tr><th>तारीख</th><th>त्यौहार का नाम</th></tr></thead>
+    <tbody id="festival-list"></tbody>
+</table>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h2 id="m-name" style="margin: 0; color: var(--bg);"></h2>
+        <img id="m-img" src="" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin: 10px 0;">
+        <div id="m-desc"></div>
+        <p id="m-contact" style="font-weight: bold; margin-bottom: 15px;"></p>
+        <button class="close-btn" onclick="closeModal()">बंद करें</button>
+    </div>
+</div>
+
+<script>
+    let festivalData = [];
+
+    fetch('festival.json')
+        .then(response => response.json())
+        .then(data => {
+            festivalData = data;
+            const listBody = document.getElementById('festival-list');
+            data.forEach((f, index) => {
+                listBody.innerHTML += `<tr onclick="showDetail(${index})"><td>${f.date}</td><td>${f.name}</td></tr>`;
+            });
+        });
+
+    function showDetail(index) {
+        const f = festivalData[index];
+        document.getElementById('m-name').innerText = f.name;
+        document.getElementById('m-img').src = f.img;
+        document.getElementById('m-desc').innerText = f.desc;
+        document.getElementById('m-contact').innerText = "संपर्क: " + f.contact;
+        document.getElementById('myModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
