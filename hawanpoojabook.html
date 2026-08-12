@@ -192,14 +192,14 @@
 <button class="excel-btn" onclick="secureExportToExcel()">Download All Bookings (Admin Only)</button>
 
 <script>
-     const encodedAdminPass = "aGF3YW5AMTIz"; 
+     const encodedAdminPass = "UmFwbjI2"; 
 
      function decodeBase64(base64) {
         return decodeURIComponent(escape(window.atob(base64)));
     }
 
     function secureExportToExcel() {
-        let userInput = prompt("Rapn26");
+        let userInput = prompt("enter password to download bookings (Admin Only):");
         
         if (userInput === null) return; // Agar cancel kar diya
 
