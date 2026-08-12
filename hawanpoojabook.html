@@ -192,12 +192,9 @@
 <button class="excel-btn" onclick="secureExportToExcel()">Download All Bookings (Admin Only)</button>
 
 <script>
-    // Yahan password direct nahi hai, balki encode kiya hua hai taaki View Source mein seedha na dikhe.
-    // Asli password jo humne yahan set kiya hai, woh hai: "hawan@123"
-    const encodedAdminPass = "aGF3YW5AMTIz"; 
+     const encodedAdminPass = "aGF3YW5AMTIz"; 
 
-    // Base64 decode karne ka function
-    function decodeBase64(base64) {
+     function decodeBase64(base64) {
         return decodeURIComponent(escape(window.atob(base64)));
     }
 
@@ -206,8 +203,7 @@
         
         if (userInput === null) return; // Agar cancel kar diya
 
-        // User ke input ko bhi encode karke match karenge taaki safe rahe
-        let hashedInput = btoa(unescape(encodeURIComponent(userInput)));
+         let hashedInput = btoa(unescape(encodeURIComponent(userInput)));
 
         if (hashedInput === encodedAdminPass) {
             let bookings = JSON.parse(localStorage.getItem('hawanBookings')) || [];
