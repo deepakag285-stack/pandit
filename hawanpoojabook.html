@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawan Puja Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #d35400;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #d35400;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b94000;
+        }
+        /* Receipt Section */
+        #receipt {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px dashed #d35400;
+            background: #fffdf9;
+            display: none;
+        }
+        .excel-btn {
+            background-color: #27ae60;
+            margin-top: 10px;
+        }
+        .excel-btn:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Hawan Puja Booking Form</h2>
+    
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="name">Full Name (Naam):</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="10 digit number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date (Tithi):</label>
+            <input type="number" id="date" min="1" max="31" placeholder="Jaise: 15" required>
+        </div>
+
+        <div class="form-group">
+            <label for="month">Month:</label>
+            <select id="month" required>
+                <option value="">Month chunein</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="poojaName">Hawan / Puja Name (Khud Type Karein):</label>
+            <input type="text" id="poojaName" placeholder="Jaise: Rudrabhishek, Gayatri Hawan, etc." required>
+        </div>
+
+        <button type="submit">Book Now</button>
+    </form>
+
+    <!-- User Copy / Receipt -->
+    <div id="receipt">
+        <h3>Booking Successful! (Aapki Copy)</h3>
+        <p><strong>Name:</strong> <span id="r_name"></span></p>
+        <p><strong>Phone:</strong> <span id="r_phone"></span></p>
+        <p><strong>Address:</strong> <span id="r_address"></span></p>
+        <p><strong>Date & Month:</strong> <span id="r_date"></span> <span id="r_month"></span></p>
+        <p><strong>Hawan/Puja:</strong> <span id="r_pooja"></span></p>
+        <button onclick="window.print()">Print / Save Copy</button>
+    </div>
+
+    <!-- Excel Export Button -->
+    <button class="excel-btn" onclick="exportToExcel()">Download All Bookings (Excel CSV)</button>
+</div>
+
+<script>
+    let bookings = [];
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const date = document.getElementById('date').value;
+        const month = document.getElementById('month').value;
+        const poojaName = document.getElementById('poojaName').value;
+
+        const bookingData = { name, phone, address, date, month, poojaName };
+        bookings.push(bookingData);
+
+        // Display Receipt
+        document.getElementById('r_name').innerText = name;
+        document.getElementById('r_phone').innerText = phone;
+        document.getElementById('r_address').innerText = address;
+        document.getElementById('r_date').innerText = date;
+        document.getElementById('r_month').innerText = month;
+        document.getElementById('r_pooja').innerText = poojaName;
+        
+        document.getElementById('receipt').style.display = 'block';
+
+        document.getElementById('bookingForm').reset();
+        alert('Hawan/Puja Booking Safal Rahi!');
+    });
+
+    function exportToExcel() {
+        if (bookings.length === 0) {
+            alert('Abhi koi booking nahi hui hai!');
+            return;
+        }
+
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "Name,Phone,Address,Date,Month,Hawan/Puja Name\n";
+
+        bookings.forEach(function(row) {
+            let rowString = `"${row.name}","${row.phone}","${row.address}","${row.date}","${row.month}","${row.poojaName}"`;
+            csvContent += rowString + "\n";
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "hawan_puja_bookings.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+<button class="excel-btn" onclick="secureExportToExcel()">Download All Bookings (Admin Only)</button>
+
+<script>
+    // Yahan password direct nahi hai, balki encode kiya hua hai taaki View Source mein seedha na dikhe.
+    // Asli password jo humne yahan set kiya hai, woh hai: "hawan@123"
+    const encodedAdminPass = "aGF3YW5AMTIz"; 
+
+    // Base64 decode karne ka function
+    function decodeBase64(base64) {
+        return decodeURIComponent(escape(window.atob(base64)));
+    }
+
+    function secureExportToExcel() {
+        let userInput = prompt("Rapn26");
+        
+        if (userInput === null) return; // Agar cancel kar diya
+
+        // User ke input ko bhi encode karke match karenge taaki safe rahe
+        let hashedInput = btoa(unescape(encodeURIComponent(userInput)));
+
+        if (hashedInput === encodedAdminPass) {
+            let bookings = JSON.parse(localStorage.getItem('hawanBookings')) || [];
+            
+            if (bookings.length === 0) {
+                alert('Abhi koi booking nahi hui hai!');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Name,Phone,Address,Date,Month,Hawan/Puja Name\n";
+
+            bookings.forEach(function(row) {
+                let rowString = `"${row.name}","${row.phone}","${row.address}","${row.date}","${row.month}","${row.poojaName}"`;
+                csvContent += rowString + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "hawan_puja_bookings.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert('Galat Password! Aap data download nahi kar sakte.');
+        }
+    }
+</script>
+
+</body>
+</html>
