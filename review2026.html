@@ -85,7 +85,7 @@
     </div>
 
 <script>
- const scriptURL = 'https://script.google.com/macros/s/AKfycbwrDM5dd1jVnFtb84o0j-lZ8gw6hRQDDb3DrRJpHGLXTpAT9E5V4wTF0XnTRTmyNN16/exec'; // Yahan apna Web App URL paste karein
+ const scriptURL = 'https://script.google.com/macros/s/AKfycbyxYsIjM97xwJB7YfkeP3lATrcEBCaVIVR7rSyotI8kcEJ-Em-8xiQKaHxyjXU46pVa/exec'; // Yahan apna Web App URL paste karein
  
 document.getElementById('reviewForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -159,7 +159,7 @@ function fetchReviews() {
             const slide = document.createElement('div');
             slide.className = `review-slide ${index === 0 ? 'active' : ''}`;
             slide.innerHTML = `
-                <img src="${item.image}" class="review-img" alt="User Image">
+                <img src="${item.image}" class="review-img" alt="User Image" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png' ">
                 <div class="review-name">${item.name}</div>
                 <div class="review-text">"${item.review}"</div>
             `;
